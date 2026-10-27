@@ -349,6 +349,115 @@ def raker():
     c.save('pk-raker')
 
 
+# ---------------------------------------------------------------- people added in v0.2
+def reading_docs():
+    c = Pc(520, 1000); g = 960
+    s = person(c, (230, g - 418), f=1, head=16, top=WHITE, pants=NAVY, skin=1, hair=0, hands=((330, 395), (360, 388)))
+    c.rect(300, 330, 410, 410, PAPER, w=3); c.rect(312, 322, 420, 400, PAPER, w=3)
+    for y in range(340, 395, 14): c.line([(326, y), (404, y)], 3, (170, 166, 158, 255))
+    c.save('of-reading')
+
+
+def mug():
+    c = Pc(520, 1000); g = 960
+    s = person(c, (240, g - 418), f=1, top=OCHRE, pants=DARK, skin=0, hair=3, skirt=True, bun=True, hands=((230, g - 150), (0, 0)))
+    hc = s['H']
+    c2 = Pc(520, 1000)
+    person(c2, (240, g - 418), f=1, top=OCHRE, pants=DARK, skin=0, hair=3, skirt=True, bun=True, hands=((230, g - 150), (hc[0] + 62, hc[1] + 46)))
+    c2.rect(hc[0] + 52, hc[1] + 6, hc[0] + 96, hc[1] + 62, (60, 120, 130, 255), w=3, r=6)
+    c2.save('of-mug')
+
+
+def sweeper():
+    c = Pc(720, 1000); g = 960
+    c.line([(330, 470), (560, 900)], 12, WOOD); c.poly([(500, 900), (640, 880), (650, 945), (500, 960)], (150, 120, 70, 255), outline=INK)
+    person(c, (230, g - 412), torso=12, f=1, feet=((180, g), (300, g)), hands=((360, 520), (440, 660)), top=GREY, pants=NAVY, skin=2, hat='hard', vest=True)
+    c.save('si-sweep')
+
+
+def backpack():
+    c = Pc(560, 1000); g = 960
+    s = person(c, (280, g - 418), f=1, top=SAGE, pants=DARK, skin=0, hair=1, feet=((230, g), (350, g)))
+    S = s['S']
+    c.rect(S[0] - 150, S[1] + 10, S[0] - 50, S[1] + 230, NAVY, r=22); c.rect(S[0] - 140, S[1] + 120, S[0] - 60, S[1] + 200, shade(NAVY, 0.85), r=12)
+    c.line([(S[0] - 60, S[1] + 20), (S[0] + 30, S[1] + 40), (S[0] + 10, S[1] + 210)], 10, shade(NAVY, 0.7))
+    c.save('ap-backpack')
+
+
+def map_reader():
+    c = Pc(600, 1000); g = 960
+    person(c, (230, g - 418), f=1, head=18, top=BRICK, pants=DARK, skin=3, hair=1, bun=True, hands=((320, 400), (450, 395)))
+    c.rect(300, 300, 480, 420, PAPER, w=3)
+    for x in (360, 420): c.line([(x, 300), (x, 420)], 2, (180, 176, 168, 255))
+    c.line([(310, 400), (360, 340), (420, 370), (470, 320)], 5, (90, 140, 170, 255)); c.circ((420, 370), 9, BRICK)
+    c.save('ap-map')
+
+
+def mopper():
+    c = Pc(820, 1000); g = 960
+    c.poly([(650, 800), (780, 800), (765, g), (665, g)], (230, 196, 60, 255), outline=INK)            # bucket
+    c.line([(340, 470), (520, 920)], 12, METAL)
+    for k in range(9): c.line([(470 + k * 12, 915), (462 + k * 13, g)], 8, (170, 166, 156, 255))
+    person(c, (230, g - 412), torso=10, f=1, feet=((170, g), (300, g)), hands=((370, 540), (440, 700)), top=(70, 110, 140, 255), pants=DARK, skin=1, hair=2)
+    c.save('ap-mop')
+
+
+def tray():
+    c = Pc(600, 1000); g = 960
+    s = person(c, (240, g - 418), f=1, top=DARK, pants=DARK, skin=2, hair=0, apron=True, feet=((190, g), (310, g)), hands=((230, g - 150), (400, 250)))
+    c.d.ellipse([310 * SS, 228 * SS, 500 * SS, 252 * SS], fill=METAL, outline=INK, width=4)
+    for x in (340, 400, 450): c.rect(x, 170, x + 34, 234, (210, 230, 240, 200), w=2)
+    c.save('re-tray')
+
+
+def notepad():
+    c = Pc(520, 1000); g = 960
+    person(c, (230, g - 418), f=1, head=14, top=WHITE, pants=DARK, skin=0, hair=2, apron=True, hands=((330, 420), (360, 395)))
+    c.rect(310, 370, 380, 450, PAPER, w=3); c.line([(350, 400), (395, 360)], 6, NAVY)
+    c.save('re-notepad')
+
+
+def wiper():
+    c = Pc(880, 1000); g = 960
+    c.rect(400, 600, 840, 632, WOOD); c.rect(440, 632, 460, g, WOOD, outline=None); c.rect(780, 632, 800, g, WOOD, outline=None)
+    person(c, (220, g - 410), torso=28, f=1, feet=((160, g), (290, g)), hands=((440, 590), (540, 588)), top=PLUM, pants=DARK, skin=1, hair=1, bun=True, apron=True)
+    c.rect(510, 576, 590, 598, (220, 230, 236, 255), w=2, r=6)
+    c.save('re-wipe')
+
+
+def basket_carrier():
+    c = Pc(560, 1000); g = 960
+    person(c, (250, g - 418), f=1, top=TEAL, pants=DARK, skin=2, hair=1, skirt=True, bun=True, hands=((230, g - 150), (320, 560)))
+    c.line([(290, 560), (320, 540), (350, 560)], 8, BRICK)
+    c.poly([(270, 580), (380, 580), (370, 680), (280, 680)], BRICK, outline=INK)
+    for x in (295, 325, 355): c.line([(x, 590), (x, 672)], 3, shade(BRICK, 0.7))
+    c.rect(290, 560, 320, 584, (150, 190, 90, 255), w=2, r=6)
+    c.save('st-basket')
+
+
+def label_reader():
+    c = Pc(520, 1000); g = 960
+    person(c, (230, g - 418), f=1, head=18, top=NAVY, pants=GREY, skin=3, hair=0, hands=((330, 420), (360, 410)))
+    c.rect(318, 340, 392, 430, (220, 140, 60, 255), w=3, r=6); c.rect(326, 368, 384, 404, PAPER, w=2)
+    c.save('st-label')
+
+
+def photographer():
+    c = Pc(560, 1000); g = 960
+    s = person(c, (230, g - 418), f=1, top=PAPER, pants=NAVY, skin=0, hair=3, hands=((0, 0), (0, 0)))
+    hc = s['H']
+    c2 = Pc(560, 1000)
+    person(c2, (230, g - 418), f=1, top=(196, 206, 214, 255), pants=NAVY, skin=0, hair=3, hands=((hc[0] + 70, hc[1] + 30), (hc[0] + 96, hc[1] + 26)))
+    c2.rect(hc[0] + 44, hc[1] - 26, hc[0] + 118, hc[1] + 30, DARK, w=2, r=8); c2.circ((hc[0] + 104, hc[1] + 2), 18, GREY, outline=INK, w=2)
+    c2.save('pk-photo')
+
+
+def jogger():
+    c = Pc(640, 1000); g = 960
+    person(c, (300, g - 405), torso=10, f=1, feet=((170, g - 40), (420, g)), hands=((230, 470), (430, 430)), top=TEAL, pants=DARK, skin=2, hair=0)
+    c.save('pk-jog')
+
+
 # ---------------------------------------------------------------- objects
 def cabinet():
     c = Pc(360, 760)
@@ -526,6 +635,71 @@ def leaves(piled, name):
     c.save(name)
 
 
+# ---------------------------------------------------------------- objects added in v0.2
+def boxes():
+    c = Pc(620, 560); g = 540
+    BOX = (196, 160, 110, 255)
+    for x0, y1, w, h in [(40, g, 260, 200), (310, g, 260, 200), (160, g - 200, 280, 190)]:
+        c.rect(x0, y1 - h, x0 + w, y1, BOX); c.line([(x0 + w / 2, y1 - h), (x0 + w / 2, y1 - h + 60)], 10, (230, 210, 170, 255))
+    c.save('of-boxes')
+
+
+def pipes():
+    c = Pc(780, 360); g = 340
+    # five pipes lying on the ground, seen at an angle: three below, two on top; the round ends face the reader
+    spots = [(40, g), (150, g), (260, g), (95, g - 92), (205, g - 92)]
+    for k, (x, y) in enumerate(spots):
+        col = (214, 214, 206, 255) if k < 3 else (196, 120, 70, 255)
+        c.poly([(x + 50, y - 100), (x + 50 + 420, y - 100 - 70), (x + 50 + 420, y - 70), (x + 50, y)], col, outline=INK, w=3)
+        c.circ((x + 50, y - 50), 50, col, outline=INK, w=3); c.circ((x + 50, y - 50), 30, shade(DARK, 0.9))
+    c.save('si-pipes')
+
+
+def stacked_chairs():
+    c = Pc(460, 980); g = 960
+    WD = (176, 120, 80, 255)
+    for x in (96, 314): c.line([(x, 628), (x, g)], 14, shade(WD, 0.7))
+    for k in range(5):
+        dy, dx = k * 62, k * 10
+        for x in (96 + dx, 314 + dx): c.line([(x, 628 - dy), (x, 660 - dy)], 12, shade(WD, 0.7))
+        c.rect(80 + dx, 600 - dy, 330 + dx, 628 - dy, WD)
+        c.line([(310 + dx, 600 - dy), (330 + dx, 360 - dy)], 16, WD); c.line([(316 + dx, 470 - dy), (328 + dx, 470 - dy)], 10, WD)
+    c.save('re-chairs')
+
+
+def mannequin():
+    c = Pc(380, 1000); g = 960
+    c.line([(190, 760), (190, g - 20)], 14, DARK); c.d.ellipse([110 * SS, (g - 40) * SS, 270 * SS, g * SS], fill=DARK)
+    c.circ((190, 120), 34, (226, 214, 196, 255), outline=INK, w=2); c.line([(190, 150), (190, 190)], 20, (226, 214, 196, 255))
+    c.poly([(130, 200), (250, 200), (260, 330), (330, 760), (50, 760), (120, 330)], (60, 110, 120, 255), outline=INK)
+    c.line([(120, 330), (260, 330)], 10, shade((60, 110, 120, 255), 0.7))
+    c.save('st-dress')
+
+
+def shoe_shelf():
+    c = Pc(780, 580); g = 560
+    c.rect(40, 120, 740, g, None, outline=WOOD, w=14)
+    for y in (300, g - 14): c.line([(40, y), (740, y)], 12, WOOD)
+    cols = [BRICK, NAVY, OCHRE, DARK]
+    for row, y in enumerate((294, g - 20)):
+        for k in range(4):
+            x = 80 + k * 165; col = cols[(k + row) % 4]
+            for dx in (0, 62): c.poly([(x + dx, y), (x + dx + 56, y), (x + dx + 56, y - 30), (x + dx + 20, y - 60), (x + dx, y - 60)], col, outline=INK, w=2)
+    c.save('st-shoes')
+
+
+def blanket():
+    c = Pc(820, 320); g = 300
+    c.d.ellipse([10 * SS, 100 * SS, 810 * SS, 310 * SS], fill=(150, 176, 110, 255))
+    c.poly([(150, 140), (690, 140), (760, 270), (80, 270)], (230, 226, 216, 255), outline=INK)
+    for k in range(1, 6):
+        t = k / 6
+        c.line([(150 + 540 * t - 70 * t * 0, 140), (80 + 680 * t, 270)], 8, BRICK)
+        y = 140 + 130 * t; c.line([(150 - 70 * t, y), (690 + 70 * t, y)], 8, BRICK)
+    c.rect(560, 60, 700, 170, (180, 130, 70, 255), r=10); c.line([(580, 60), (630, 20), (680, 60)], 8, (140, 96, 50, 255))
+    c.save('pk-blanket')
+
+
 # ---------------------------------------------------------------- backdrops
 def office_wall():
     c = Pc(1500, 500)
@@ -627,6 +801,8 @@ if __name__ == '__main__':
     for fn in [typing, copier, phone, pointing, chair_carrier, ladder_climber, helmet, boards, barrow, painter, queue, agent, suitcase, lookup,
                handler, pour, menus, chef, server_plate, jacket, cashier, cart, clerk, shovel, watering, bench, dog, raker,
                cabinet, plant, bricks, cones, seats, coat_rack, fruit_stand, clothes_rack, bike_lamp,
+               reading_docs, mug, sweeper, backpack, map_reader, mopper, tray, notepad, wiper, basket_carrier, label_reader, photographer, jogger,
+               boxes, pipes, stacked_chairs, mannequin, shoe_shelf, blanket,
                office_wall, site_wall, airport_wall, restaurant_wall, store_wall, park_wall, ui_cards, cover]:
         fn()
     meeting_table(True, 'of-table-after'); meeting_table(False, 'of-table-before')

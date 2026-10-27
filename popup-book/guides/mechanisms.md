@@ -27,6 +27,7 @@ const spreadGate = {
 | `env.sfx(type, amt)` | 合成音效：`page` `creak` `thud` `bell` `pop` `crane` `drum` `gong` `fire` |
 | `env.say(text, lang)` | 用瀏覽器的語音念出來（英文書）；會優先挑 natural / premium / enhanced 的聲音 |
 | `env.speaking()` | 現在是不是還在念（排下一句時用；測試模式一律 false） |
+| `env.zone({x, y, w, h})` | 頁面上一塊可以點的長方形（中心 x, y），例如印在紙上的一行字；`mech.tap` 收到 `{ mesh, def, zone: true }`。測試用 `__app.tapZone(n, k)` |
 | `env.loadImage(src)` | 載入圖片（例如皮影戲的偶），回傳 Promise |
 | `env.isResting()` | 這頁是不是靜止在畫面上 |
 

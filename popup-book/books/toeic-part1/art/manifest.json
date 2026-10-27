@@ -11,6 +11,12 @@
    "margin": 4
   },
   {
+   "piece": "ap-backpack",
+   "from": "ap-backpack",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "ap-cart-after",
    "from": "ap-cart-after",
    "cap": 820,
@@ -41,6 +47,18 @@
    "margin": 4
   },
   {
+   "piece": "ap-map",
+   "from": "ap-map",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "ap-mop",
+   "from": "ap-mop",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "ap-seats",
    "from": "ap-seats",
    "cap": 820,
@@ -63,6 +81,12 @@
    "from": "cover"
   },
   {
+   "piece": "of-boxes",
+   "from": "of-boxes",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "of-cabinet",
    "from": "of-cabinet",
    "cap": 820,
@@ -81,6 +105,12 @@
    "margin": 4
   },
   {
+   "piece": "of-mug",
+   "from": "of-mug",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "of-phone",
    "from": "of-phone",
    "cap": 820,
@@ -95,6 +125,12 @@
   {
    "piece": "of-pointing",
    "from": "of-pointing",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "of-reading",
+   "from": "of-reading",
    "cap": 820,
    "margin": 4
   },
@@ -135,8 +171,20 @@
    "margin": 4
   },
   {
+   "piece": "pk-blanket",
+   "from": "pk-blanket",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "pk-dog",
    "from": "pk-dog",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "pk-jog",
+   "from": "pk-jog",
    "cap": 820,
    "margin": 4
   },
@@ -149,6 +197,12 @@
   {
    "piece": "pk-leaves-before",
    "from": "pk-leaves-before",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "pk-photo",
+   "from": "pk-photo",
    "cap": 820,
    "margin": 4
   },
@@ -177,6 +231,12 @@
    "margin": 4
   },
   {
+   "piece": "re-chairs",
+   "from": "re-chairs",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "re-chef",
    "from": "re-chef",
    "cap": 820,
@@ -191,6 +251,12 @@
   {
    "piece": "re-menus",
    "from": "re-menus",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "re-notepad",
+   "from": "re-notepad",
    "cap": 820,
    "margin": 4
   },
@@ -219,10 +285,22 @@
    "margin": 4
   },
   {
+   "piece": "re-tray",
+   "from": "re-tray",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "re-wall",
    "from": "re-wall",
    "cap": 1500,
    "margin": 2
+  },
+  {
+   "piece": "re-wipe",
+   "from": "re-wipe",
+   "cap": 820,
+   "margin": 4
   },
   {
    "piece": "si-barrow",
@@ -267,6 +345,24 @@
    "margin": 4
   },
   {
+   "piece": "si-pipes",
+   "from": "si-pipes",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "si-sweep",
+   "from": "si-sweep",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "si-wall",
+   "from": "si-wall",
+   "cap": 1500,
+   "margin": 2
+  },
+  {
    "piece": "si-wall-after",
    "from": "si-wall-after",
    "cap": 820,
@@ -279,10 +375,10 @@
    "margin": 4
   },
   {
-   "piece": "si-wall",
-   "from": "si-wall",
-   "cap": 1500,
-   "margin": 2
+   "piece": "st-basket",
+   "from": "st-basket",
+   "cap": 820,
+   "margin": 4
   },
   {
    "piece": "st-cart",
@@ -303,6 +399,12 @@
    "margin": 4
   },
   {
+   "piece": "st-dress",
+   "from": "st-dress",
+   "cap": 820,
+   "margin": 4
+  },
+  {
    "piece": "st-fruit",
    "from": "st-fruit",
    "cap": 820,
@@ -311,6 +413,12 @@
   {
    "piece": "st-jacket",
    "from": "st-jacket",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "st-label",
+   "from": "st-label",
    "cap": 820,
    "margin": 4
   },
@@ -329,6 +437,12 @@
   {
    "piece": "st-shelf-before",
    "from": "st-shelf-before",
+   "cap": 820,
+   "margin": 4
+  },
+  {
+   "piece": "st-shoes",
+   "from": "st-shoes",
    "cap": 820,
    "margin": 4
   },

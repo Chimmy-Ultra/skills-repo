@@ -1,6 +1,7 @@
-"""Prompt pack for 多益 Part 1 看圖練習 (TOEIC Listening Part 1, Photographs).
-Six scenes from ETS's list of test settings; per scene: a back-wall elevation, a sheet of people caught
-mid-action, and a sheet of objects (including the before / after states the book swaps between)."""
+"""Prompt packs for 多益 Part 1 看圖練習 (TOEIC Listening Part 1, Photographs).
+toeic-art-1: six scenes from ETS's list of test settings; per scene: a back-wall elevation, a sheet of people caught
+mid-action, and a sheet of objects (including the before / after states the book swaps between).
+toeic-art-2: one more sheet per scene with the people and objects added in v0.2 (8–9 things per scene)."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'tools'))
 from prompts import Pack, SINGLE, OBJ, SHEET, STRIP
@@ -123,3 +124,39 @@ pack.reject('a person\'s hands are not on the object of their action, or the act
 pack.reject('a screen, board, sign, label or menu shows letters, numbers or a logo')
 pack.reject('in the before / after pairs (03, 06, 09, 12, 15, 18) the two states are not clearly the same object, or the difference is hard to see')
 pack.write(os.path.dirname(os.path.abspath(__file__)))
+
+
+# ======================= toeic-art-2: the people and objects added in v0.2 =======================
+pack2 = Pack(title='多益 Part 1 看圖練習（補充）', batch='toeic-art-2', style=STYLE, anchor='01-office-people', anchor_dir='toeic-art-1')
+MIXED = ("People and objects share this sheet: draw the people at the same scale as in the reference image, full body including the feet, "
+         "and the objects at their real size next to them.")
+T = lambda fid, title, body: pack2.add(fid, title, '1536x1024', body, [PEOPLE, MIXED, SHEET, SCREENS], section='補充 More people and things')
+T('20-office-more', '辦公室：再加三樣',
+  "Subject: three separate subjects: (1) a man in a white shirt standing and reading a few printed documents held in both hands in front of his chest, head bowed toward them; "
+  "(2) a woman standing and drinking from a mug held to her lips; "
+  "(3) three cardboard boxes stacked on their own, two side by side on the bottom and one on top.")
+T('21-site-more', '工地：再加兩樣',
+  "Subject: two separate subjects: (1) a construction worker in a hard hat and high-visibility vest sweeping the ground with a wide push broom held in both hands; "
+  "(2) five long plastic pipes lying stacked on their own, three underneath and two on top, seen from a three-quarter angle so their round open ends are visible.")
+T('22-airport-more', '機場：再加三樣',
+  "Subject: three separate subjects: (1) a man standing in side view wearing a backpack on his back, both straps over his shoulders, hands at his sides; "
+  "(2) a woman standing and holding a large unfolded paper map open in both hands, looking down at it, the map showing only coloured lines and shapes; "
+  "(3) an airport cleaner in a uniform mopping the floor with a mop held in both hands, a yellow wheeled mop bucket beside him, drawn together as one piece.")
+T('23-restaurant-more', '餐廳：再加四樣',
+  "Subject: four separate subjects: (1) a waiter walking while carrying a round tray with three drinks on it, the tray held up on one hand at shoulder height; "
+  "(2) a waiter in an apron standing and writing on a small notepad with a pen; "
+  "(3) a server leaning over a small café table and wiping it with a cloth, the table drawn together with her as one piece; "
+  "(4) five wooden café chairs stacked on top of one another, standing on their own.")
+T('24-store-more', '商店：再加四樣',
+  "Subject: four separate subjects: (1) a woman walking and carrying a plastic shopping basket on her arm with a few groceries inside; "
+  "(2) a man standing and reading the label on a jar held close in one hand, the label showing only coloured blocks; "
+  "(3) a dress form on a stand displaying a dress, with no head and no face; "
+  "(4) a low shelf unit with two shelves holding pairs of shoes lined up neatly in a row.")
+T('25-park-more', '公園：再加三樣',
+  "Subject: three separate subjects: (1) a woman standing and taking a photograph with a camera held up to her eye in both hands; "
+  "(2) a man jogging in sportswear, mid-stride, one foot off the ground; "
+  "(3) a checked picnic blanket spread out flat on a small oval patch of grass, a wicker picnic basket on one corner, nobody on it.")
+pack2.reject('a person\'s hands are not on the object of their action, or the action could be read two ways')
+pack2.reject('the people are drawn at a clearly different scale or in a different style from the reference image')
+pack2.reject('a screen, board, sign, label or map shows letters, numbers or a logo')
+pack2.write(os.path.dirname(os.path.abspath(__file__)))

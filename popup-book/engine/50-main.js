@@ -196,13 +196,23 @@ function seal(g, X, Y, sz, ch) {
   g.fillStyle = VERMIL; g.fillRect(X - sz / 2, Y, sz, sz);
   g.font = `${(sz * 0.62).toFixed(1)}px ${FONT}, serif`; g.fillStyle = '#f2e6d0'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(ch, X, Y + sz / 2);
 }
-const spreadState = SPREADS.map(() => ({ cards: [], extras: [], mech: null }));
+const spreadState = SPREADS.map(() => ({ cards: [], extras: [], zones: [], mech: null }));
+// a tappable rectangle lying on the page (a line of text, a printed figure): x, y = centre, w, h, in reader units.
+// mech.tap gets the zone object { mesh, def, zone: true }.
+function makeZone(def) {
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(def.w, def.h), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false }));
+  mesh.position.set(def.x, def.y, 0.002);
+  const z = { mesh, def, zone: true };
+  mesh.userData.card = z; mesh.userData.tap = true;
+  return z;
+}
 function buildSpreads() {
   SPREADS.forEach((sp, i) => {
     const ss = spreadState[i];
     const env = {
       card(def) { const c = new Card(def); (def.parent ? def.parent.root : book.content).add(c.root); ss.cards.push(c); return c; },
       add(obj) { book.content.add(obj); ss.extras.push(obj); },
+      zone(def) { const z = makeZone(def); book.content.add(z.mesh); ss.extras.push(z.mesh); ss.zones.push(z); return z; },
       light(obj) { book.content.add(obj); },   // always in the scene, so the light count (and every shader) stays fixed
       loadImage, say, speaking: () => !TEST && 'speechSynthesis' in window && speechSynthesis.speaking,
       sfx, isResting: () => S.mode === 'rest' && S.P === i + 1, mistFade: () => (S.P === i + 1 && !S.turn ? 1 : 0),
@@ -359,6 +369,7 @@ function pick(ev) {
   if (!isOpen(S.P)) return null;
   const ss = spreadState[S.P - 1];
   const meshes = ss.cards.filter((c) => c.root.visible && (c.mesh.userData.tap || c.mesh.userData.drag)).map((c) => c.mesh);
+  for (const z of ss.zones) if (z.mesh.visible) meshes.push(z.mesh);
   const hit = ray.intersectObjects(meshes, false)[0];
   return hit ? hit.object.userData.card : null;
 }
@@ -594,6 +605,8 @@ window.__app = {
     return out;
   },
   card: (n, id, k = 0) => spreadState[n - 1].cards.filter((c) => c.def.id === id)[k],
+  tapZone(n, k) { return spreadState[n - 1].mech.tap(spreadState[n - 1].zones[k]); },
+  zoneRect(n, k) { const z = spreadState[n - 1].zones[k]; return z && z.def; },
   tapCard(n, id, k = 0) { const c = spreadState[n - 1].cards.filter((c) => c.def.id === id)[k]; return spreadState[n - 1].mech.tap(c); },
   cardScreen(n, id, k = 0, v = 0.5) { const c = spreadState[n - 1].cards.filter((c) => c.def.id === id)[k]; const w = V3(); c.mesh.getWorldPosition(w); const p = cardPoint(c, 0.5, v); return this.toScreen(p[0], p[1], p[2]); },
   toScreen(x, y, z = 0) { const v = V3(x + book.group.position.x, y, z).project(camera); const r = renderer.domElement.getBoundingClientRect(); return [r.left + (v.x + 1) / 2 * r.width, r.top + (1 - v.y) / 2 * r.height]; },
