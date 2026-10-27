@@ -1,0 +1,520 @@
+{
+ "src": [
+  "../art-src"
+ ],
+ "stock": "#f2ead8",
+ "hooks": "hooks.py",
+ "items": [
+  {
+   "piece": "zhengdian",
+   "from": "04-zhengdian",
+   "cap": 900
+  },
+  {
+   "piece": "jiaodian",
+   "from": "05-jiaodian",
+   "cap": 900
+  },
+  {
+   "piece": "teahouse",
+   "from": "06-teahouse",
+   "cap": 900
+  },
+  {
+   "piece": "shop",
+   "from": "07-shop-awning",
+   "cap": 900
+  },
+  {
+   "piece": "house-thatch",
+   "from": "08-house-thatched",
+   "cap": 900
+  },
+  {
+   "piece": "house-tile",
+   "from": "09-house-tiled",
+   "cap": 900
+  },
+  {
+   "piece": "shop2",
+   "from": "10-two-storey-shop",
+   "cap": 900
+  },
+  {
+   "piece": "temple",
+   "from": "11-temple-hall",
+   "cap": 900
+  },
+  {
+   "piece": "chazi",
+   "from": "12-chazi-fence",
+   "cap": 1400,
+   "margin": 3
+  },
+  {
+   "sheet": [
+    "camels-a",
+    "camels-b"
+   ],
+   "from": "13-camels",
+   "cap": 620
+  },
+  {
+   "sheet": [
+    "guard-a",
+    "gatekeeper",
+    "porter",
+    "vendor",
+    "guard-b",
+    "scholar",
+    "official",
+    "woman",
+    "child",
+    "monk"
+   ],
+   "from": "14-people-street",
+   "cap": 380
+  },
+  {
+   "sheet": [
+    "oxcart",
+    "donkeycart",
+    "sedan",
+    "donkey-rider",
+    "pack-donkey"
+   ],
+   "from": "15-vehicles",
+   "cap": 520
+  },
+  {
+   "sheet": [
+    "stall-umbrella",
+    "stall-awning",
+    "stall-umbrella2",
+    "stall-fortune",
+    "handcart"
+   ],
+   "from": "25-stalls",
+   "cap": 460
+  },
+  {
+   "sheet": [
+    "pole-a",
+    "pole-b",
+    "pole-c",
+    "shout",
+    "wave",
+    "brace",
+    "tracker-a",
+    "tracker-b",
+    "tracker-c",
+    "pole-d",
+    "pole-e",
+    "pole-f"
+   ],
+   "from": "26-boat-crew",
+   "cap": 380
+  },
+  {
+   "sheet": [
+    "look-point",
+    "look-mother",
+    "look-shout",
+    "look-scholar",
+    "look-porter",
+    "look-woman",
+    "look-old",
+    "look-point2",
+    "look-lean",
+    "look-woman2"
+   ],
+   "from": "27-onlookers",
+   "cap": 380,
+   "split": {
+    "0": [
+     0.35,
+     0.62
+    ]
+   }
+  },
+  {
+   "piece": "willow-a",
+   "from": "16-tree-willow-a",
+   "cap": 820,
+   "boost": 1.6,
+   "keep_holes": 260,
+   "margin": 4,
+   "close_k": 3
+  },
+  {
+   "piece": "willow-b",
+   "from": "17-tree-willow-b",
+   "cap": 820,
+   "boost": 1.6,
+   "keep_holes": 260,
+   "margin": 4,
+   "close_k": 3
+  },
+  {
+   "piece": "elm",
+   "from": "18-tree-elm",
+   "cap": 820,
+   "boost": 1.6,
+   "keep_holes": 260,
+   "margin": 4,
+   "close_k": 3
+  },
+  {
+   "piece": "apricot",
+   "from": "19-tree-apricot",
+   "cap": 820,
+   "boost": 1.6,
+   "keep_holes": 260,
+   "margin": 4,
+   "close_k": 3
+  },
+  {
+   "piece": "bridge",
+   "from": "20-rainbow-bridge",
+   "cap": 1300,
+   "margin": 4
+  },
+  {
+   "piece": "hull",
+   "from": "21-grain-boat-hull",
+   "cap": 1000
+  },
+  {
+   "piece": "mast",
+   "from": "22-aframe-mast",
+   "cap": 720,
+   "margin": 4,
+   "keep_holes": 4000
+  },
+  {
+   "piece": "cargo-boat",
+   "from": "23-cargo-boat",
+   "cap": 1000
+  },
+  {
+   "piece": "small-boat",
+   "from": "24-small-boat",
+   "cap": 800
+  },
+  {
+   "flat": "cover",
+   "from": "28-cover",
+   "quality": 88
+  },
+  {
+   "water": "water",
+   "from": "29-water"
+  },
+  {
+   "piece": "stern-boat",
+   "from": "30-boat-stern",
+   "cap": 760
+  },
+  {
+   "piece": "mast2",
+   "from": "31-mast-stern",
+   "cap": 760,
+   "margin": 4,
+   "keep_holes": 40000
+  },
+  {
+   "sheet": [
+    "boat-moored",
+    "sampan",
+    "boat-passenger",
+    "boat-fishing"
+   ],
+   "from": "32-boats-river",
+   "cap": 760
+  },
+  {
+   "sheet": [
+    "crew-pole-a",
+    "crew-shout",
+    "crew-pole-b",
+    "crew-rope-a",
+    "crew-pole-c",
+    "crew-brace",
+    "crew-rope-b",
+    "crew-rope-c"
+   ],
+   "from": "33-crew-back",
+   "cap": 380
+  },
+  {
+   "piece": "xuande",
+   "from": "34-xuande-gate",
+   "cap": 1300
+  },
+  {
+   "piece": "duolou",
+   "from": "35-duolou",
+   "cap": 900
+  },
+  {
+   "piece": "queting",
+   "from": "36-queting",
+   "cap": 700
+  },
+  {
+   "piece": "yulang",
+   "from": "37-yulang",
+   "cap": 1536,
+   "margin": 0
+  },
+  {
+   "piece": "heiqi",
+   "from": "38-heiqi-chazi",
+   "cap": 1536,
+   "margin": 0
+  },
+  {
+   "sheet": [
+    "crane0",
+    "crane1",
+    "crane2",
+    "crane3",
+    "crane4",
+    "crane5",
+    "crane6",
+    "crane7",
+    "crane8",
+    "crane9",
+    "crane-stand-a",
+    "crane-stand-b"
+   ],
+   "from": "39-cranes",
+   "cap": 300,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "off-purple",
+    "off-red",
+    "off-green",
+    "off-purple2",
+    "off-rider",
+    "off-retinue",
+    "guard-halberd-a",
+    "guard-halberd-b",
+    "page-box"
+   ],
+   "from": "40-officials",
+   "cap": 420
+  },
+  {
+   "piece": "pear",
+   "from": "41-tree-pear",
+   "cap": 820,
+   "boost": 1.5,
+   "keep_holes": 260,
+   "margin": 4,
+   "close_k": 3
+  },
+  {
+   "piece": "peach",
+   "from": "42-tree-peach",
+   "cap": 820,
+   "boost": 1.5,
+   "keep_holes": 260,
+   "margin": 4,
+   "close_k": 3
+  },
+  {
+   "atlas": "lotus",
+   "from": "43-lotus-leaves",
+   "scale": 0.5
+  },
+  {
+   "piece": "xg-gate",
+   "from": "44-xiangguo-gate",
+   "cap": 1100
+  },
+  {
+   "piece": "xg-pavilion",
+   "from": "45-temple-pavilion",
+   "cap": 1000
+  },
+  {
+   "piece": "xg-corridor",
+   "from": "46-temple-corridor",
+   "cap": 2000,
+   "margin": 0,
+   "repeat": 2
+  },
+  {
+   "sheet": [
+    "fair-birds",
+    "fair-mats",
+    "fair-saddles",
+    "fair-fruit",
+    "fair-honey"
+   ],
+   "from": "47-fair-stalls-a",
+   "cap": 480
+  },
+  {
+   "sheet": [
+    "fair-brush",
+    "fair-nuns",
+    "fair-books",
+    "fair-fortune",
+    "fair-incense"
+   ],
+   "from": "48-fair-stalls-b",
+   "cap": 480
+  },
+  {
+   "sheet": [
+    "fair-monk-a",
+    "fair-monk-b",
+    "fair-nun",
+    "fair-scholar",
+    "fair-woman",
+    "fair-cageman",
+    "fair-couple",
+    "fair-child",
+    "fair-porter",
+    "fair-oldwoman"
+   ],
+   "from": "49-fair-people",
+   "cap": 380
+  },
+  {
+   "piece": "goulan",
+   "from": "50-goulan-stage",
+   "cap": 1100
+  },
+  {
+   "sheet": [
+    "perf-rod",
+    "perf-marionette",
+    "perf-story",
+    "perf-wrestle",
+    "perf-pole",
+    "perf-cuju",
+    "perf-singer",
+    "perf-birds",
+    "perf-zaju"
+   ],
+   "from": "51-performers",
+   "cap": 420,
+   "merge": {
+    "6": 5
+   }
+  },
+  {
+   "sheet": [
+    "sp-general",
+    "sp-scholar",
+    "sp-booth",
+    "sp-lady",
+    "sp-demon",
+    "sp-horse"
+   ],
+   "from": "52-shadow-play",
+   "cap": 300,
+   "sprite": true,
+   "cards": {
+    "sp-booth": 760
+   }
+  },
+  {
+   "sheet": [
+    "wz-laugh-a",
+    "wz-laugh-b",
+    "wz-woman",
+    "wz-snack",
+    "wz-medicine",
+    "wz-barber",
+    "wz-clothes",
+    "wz-pictures",
+    "wz-father",
+    "wz-fortune"
+   ],
+   "from": "53-wazi-crowd",
+   "cap": 380
+  },
+  {
+   "piece": "wz-teahouse",
+   "from": "54-wazi-teahouse",
+   "cap": 1000
+  },
+  {
+   "piece": "wz-shed",
+   "from": "55-wazi-entrance",
+   "cap": 1000
+  },
+  {
+   "piece": "zhouqiao",
+   "from": "56-zhouqiao",
+   "cap": 1300
+  },
+  {
+   "piece": "stonewall",
+   "from": "57-stone-wall",
+   "cap": 2000,
+   "margin": 0,
+   "repeat": 2
+  },
+  {
+   "sheet": [
+    "ns-stew",
+    "ns-buns",
+    "ns-grill",
+    "ns-pickle",
+    "ns-sugar"
+   ],
+   "from": "58-night-stalls-a",
+   "cap": 480
+  },
+  {
+   "sheet": [
+    "ns-dried",
+    "ns-noodle",
+    "ns-fruit",
+    "ns-poultry",
+    "ns-tea"
+   ],
+   "from": "59-night-stalls-b",
+   "cap": 480
+  },
+  {
+   "sheet": [
+    "ln-round-a",
+    "ln-round-b",
+    "ln-round-c",
+    "ln-round-d",
+    "ln-round-e",
+    "ln-square-a",
+    "ln-square-b",
+    "ln-pole-a",
+    "ln-pole-b",
+    "ln-pole-c",
+    "ln-carry",
+    "ln-frame"
+   ],
+   "from": "60-lanterns",
+   "cap": 380
+  },
+  {
+   "sheet": [
+    "np-diners",
+    "np-vendor",
+    "np-family",
+    "np-scholar",
+    "np-watch",
+    "np-sweets",
+    "np-friends",
+    "np-porter"
+   ],
+   "from": "61-night-people",
+   "cap": 400
+  }
+ ]
+}

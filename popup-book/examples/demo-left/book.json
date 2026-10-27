@@ -1,0 +1,10 @@
+{
+  "title": "電流與電阻",
+  "binding": "left",
+  "lang": "zh-Hant",
+  "latinFont": "EB Garamond",
+  "aria": "電流與電阻：可以用手指翻頁的立體書（測試書）",
+  "loader": "準備中",
+  "cover": { "image": "cover", "style": "label", "subtitle": "Current & Resistance", "seal": "電" },
+  "paper": "#efe8d8"
+}

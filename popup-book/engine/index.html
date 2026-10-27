@@ -1,0 +1,54 @@
+<title>%%TITLE%%</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+%%FONTS%%
+/* Layout: the WebGL canvas fills the screen and is the book; a quiet HUD floats at the bottom edge (chapter dots, hint) with a sound toggle at the top right. */
+:root {
+  --bg: #15100c;
+  --ink: #f1e7d3;
+  --muted: rgba(241, 231, 211, 0.72);
+  --panel: rgba(21, 16, 12, 0.46);
+  --line: rgba(241, 231, 211, 0.18);
+  --vermil: #b8492f;
+  --f-brush: %%UIFONT%%;
+  color-scheme: dark;
+}
+html, body { height: 100%; margin: 0; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-brush); overflow: hidden; -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
+#stage { position: fixed; inset: 0; touch-action: none; }
+#stage canvas { display: block; outline: none; -webkit-tap-highlight-color: transparent; }
+.hud { position: fixed; left: 0; right: 0; bottom: 0; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 0 max(16px, env(safe-area-inset-right, 0px)) max(8px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.hint { margin: 0; font-size: 15px; letter-spacing: 0.14em; color: var(--muted); background: var(--panel); border: 1px solid var(--line); padding: 4px 14px; border-radius: 999px;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: opacity .6s ease; text-align: center; max-width: calc(100vw - 32px); }
+.hint.gone { opacity: 0; }
+.dots { pointer-events: auto; display: flex; gap: 2px; }
+.dots button { width: 28px; height: 22px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.dots button::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: rgba(241, 231, 211, 0.38); transition: background .3s ease, transform .3s ease; box-shadow: 0 0 6px rgba(0,0,0,.5); }
+.dots button.on::before { background: var(--vermil); transform: scale(1.25); }
+.tools { position: fixed; top: max(10px, env(safe-area-inset-top, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); display: flex; gap: 6px; }
+.tool { font: inherit; font-size: 14px; letter-spacing: 0.1em;
+  color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: 0.75; }
+.tool svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+#btnSound[aria-pressed="false"] { opacity: 0.45; }
+button:focus-visible { outline: 2px solid var(--vermil); outline-offset: 2px; }
+#loader { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); transition: opacity .9s ease; z-index: 5; }
+#loader .msg { font-size: 18px; letter-spacing: 0.4em; color: var(--muted); padding: 0 16px; text-align: center; }
+#loader.done { opacity: 0; pointer-events: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.turn-hint { display: none; position: fixed; top: max(14px, env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%); margin: 0; font-size: 14px; letter-spacing: .14em; color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; white-space: nowrap; pointer-events: none; }
+body.portrait .turn-hint { display: block; }
+@media (prefers-reduced-motion: reduce) { .hint, #loader { transition: none; } }
+</style>
+<div id="stage" aria-label="%%ARIA%%"></div>
+<div class="hud"><p id="hint" class="hint gone"></p><nav id="dots" class="dots" aria-label="頁次"></nav></div>
+<div class="tools"><button id="btnFull" class="tool" type="button" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span>全螢幕</span></button><button id="btnSound" class="tool" type="button" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h2.5l3.5-3v10l-3.5-3H2.5zM11 5.5a3.5 3.5 0 0 1 0 5M12.8 3.8a6 6 0 0 1 0 8.4"/></svg><span>聲音開</span></button></div>
+<div id="sr" class="sr-only" aria-live="polite"></div>
+<p class="turn-hint" aria-hidden="true">%%TURNHINT%%</p>
+<div id="loader"><div class="msg">%%LOADER%%</div></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js"}}</script>
+<script type="module">
+%%APP%%
+</script>

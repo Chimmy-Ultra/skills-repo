@@ -1,0 +1,1 @@
+const SPREADS = [spreadOhm, spreadJoule];

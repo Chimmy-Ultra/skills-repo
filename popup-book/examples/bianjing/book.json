@@ -1,0 +1,9 @@
+{
+  "title": "汴京一日",
+  "binding": "right",
+  "lang": "zh-Hant",
+  "aria": "汴京一日：可以用手指翻頁的立體書",
+  "loader": "研墨中",
+  "cover": { "image": "cover", "style": "slip", "seal": "宋" },
+  "planImages": ["water"]
+}

@@ -1,0 +1,46 @@
+{
+ "output_dir": "demo-art-1",
+ "style_reference": "demo-art-1/01-battery.png",
+ "images": [
+  {
+   "file": "01-battery.png",
+   "title": "電池（風格基準，先生成）",
+   "section": "歐姆定律",
+   "size": "1024x1536",
+   "strip": false,
+   "transparent_background": true,
+   "use_style_reference": false,
+   "prompt": "Scientific illustration in the manner of a 19th-century physics textbook (Ganot's 'Elements of Physics'): fine steel-engraving line work with cross-hatching, lightly hand-coloured in faded watercolour washes (brass, mahogany, porcelain white, muted red and slate blue) on warm off-white paper tone. Precise, restrained, instructive; not glossy, not 3D-rendered, no cartoon outlines. Laboratory apparatus as it really looks and works: correct proportions, visible terminals, screws and wires; no invented parts. Presentation: one isolated subject for a die-cut pop-up book. Flat front elevation, straight-on orthographic view, no perspective, no ground plane, no cast shadow, no background scenery, even neutral daylight. Centred on a plain pure white background, with a generous empty margin all around; nothing touches the image edges. Subject: a single large dry-cell battery standing upright, cylindrical zinc can with a paper wrapper, brass positive cap on top and a terminal screw. Absolutely no writing anywhere: no Chinese characters, letters, numbers, seals, signatures, watermarks or frames. Every signboard, plaque and banner is blank."
+  },
+  {
+   "file": "02-resistor.png",
+   "title": "電阻（大）",
+   "section": "歐姆定律",
+   "size": "1536x1024",
+   "strip": false,
+   "transparent_background": true,
+   "use_style_reference": true,
+   "prompt": "Scientific illustration in the manner of a 19th-century physics textbook (Ganot's 'Elements of Physics'): fine steel-engraving line work with cross-hatching, lightly hand-coloured in faded watercolour washes (brass, mahogany, porcelain white, muted red and slate blue) on warm off-white paper tone. Precise, restrained, instructive; not glossy, not 3D-rendered, no cartoon outlines. Laboratory apparatus as it really looks and works: correct proportions, visible terminals, screws and wires; no invented parts. Presentation: one isolated subject for a die-cut pop-up book. Flat front elevation, straight-on orthographic view, no perspective, no ground plane, no cast shadow, no background scenery, even neutral daylight. Centred on a plain pure white background, with a generous empty margin all around; nothing touches the image edges. Subject: a large ceramic carbon resistor lying horizontally, colour bands painted around its body, straight wire leads to both sides. Absolutely no writing anywhere: no Chinese characters, letters, numbers, seals, signatures, watermarks or frames. Every signboard, plaque and banner is blank."
+  },
+  {
+   "file": "03-lamp.png",
+   "title": "小燈泡與燈座",
+   "section": "歐姆定律",
+   "size": "1024x1536",
+   "strip": false,
+   "transparent_background": true,
+   "use_style_reference": true,
+   "prompt": "Scientific illustration in the manner of a 19th-century physics textbook (Ganot's 'Elements of Physics'): fine steel-engraving line work with cross-hatching, lightly hand-coloured in faded watercolour washes (brass, mahogany, porcelain white, muted red and slate blue) on warm off-white paper tone. Precise, restrained, instructive; not glossy, not 3D-rendered, no cartoon outlines. Laboratory apparatus as it really looks and works: correct proportions, visible terminals, screws and wires; no invented parts. Presentation: one isolated subject for a die-cut pop-up book. Flat front elevation, straight-on orthographic view, no perspective, no ground plane, no cast shadow, no background scenery, even neutral daylight. Centred on a plain pure white background, with a generous empty margin all around; nothing touches the image edges. Subject: a small incandescent bulb in a brass screw socket on a little wooden base, the filament visible inside the clear glass. Absolutely no writing anywhere: no Chinese characters, letters, numbers, seals, signatures, watermarks or frames. Every signboard, plaque and banner is blank."
+  },
+  {
+   "file": "04-people.png",
+   "title": "學生們",
+   "section": "人物",
+   "size": "1536x1024",
+   "strip": false,
+   "transparent_background": true,
+   "use_style_reference": true,
+   "prompt": "Scientific illustration in the manner of a 19th-century physics textbook (Ganot's 'Elements of Physics'): fine steel-engraving line work with cross-hatching, lightly hand-coloured in faded watercolour washes (brass, mahogany, porcelain white, muted red and slate blue) on warm off-white paper tone. Precise, restrained, instructive; not glossy, not 3D-rendered, no cartoon outlines. Presentation: a sheet of separate subjects for a die-cut pop-up book, arranged in a loose grid with clear empty space between them; no subject overlaps another and each is fully visible. No ground plane, no cast shadows, no background scenery, even neutral daylight, plain pure white background, nothing touching the image edges. Subject: five separate students in plain present-day clothes, full body, three-quarter front view: one pointing, one writing in a notebook, one holding a multimeter probe, one leaning in to look, one with arms crossed thinking. Absolutely no writing anywhere: no Chinese characters, letters, numbers, seals, signatures, watermarks or frames. Every signboard, plaque and banner is blank."
+  }
+ ]
+}

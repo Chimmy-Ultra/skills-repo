@@ -1,0 +1,11 @@
+{
+ "src": ["../art-src"],
+ "items": [
+  {"piece": "battery", "from": "battery", "cap": 600},
+  {"piece": "resistor", "from": "resistor", "cap": 900, "margin": 4},
+  {"piece": "lamp", "from": "lamp", "cap": 600},
+  {"piece": "knob", "from": "knob", "cap": 400, "margin": 4},
+  {"piece": "student", "from": "student", "cap": 600},
+  {"flat": "cover", "from": "cover"}
+ ]
+}
