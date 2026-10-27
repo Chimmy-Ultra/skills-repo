@@ -1,0 +1,10 @@
+{
+  "title": "多益 Part 1 看圖練習",
+  "binding": "left",
+  "lang": "en-US",
+  "latinFont": "EB Garamond",
+  "aria": "多益 Part 1 看圖練習：可以用手指翻頁的立體書",
+  "loader": "準備中",
+  "paper": "#f1ebdd",
+  "cover": { "image": "cover", "style": "label", "subtitle": "TOEIC Listening Part 1 · Photographs", "seal": "聽" }
+}

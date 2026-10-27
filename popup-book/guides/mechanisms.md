@@ -25,7 +25,8 @@ const spreadGate = {
 | `env.add(obj)` | 加一個 three.js 物件（光暈、粒子、sprite）。**翻頁時引擎會把它們全部 `visible = false`，回到這頁時全部設回 `true`**，所以要自己控制顯示的東西放進一個 `THREE.Group`，把 group 交給 `env.add`（見鶴） |
 | `env.light(light)` | 加點光源。它一直留在場景裡（強度設 0 = 關），這樣所有材質不會因為光源數量改變而重新編譯 |
 | `env.sfx(type, amt)` | 合成音效：`page` `creak` `thud` `bell` `pop` `crane` `drum` `gong` `fire` |
-| `env.say(text, lang)` | 用瀏覽器的語音念出來（英文書） |
+| `env.say(text, lang)` | 用瀏覽器的語音念出來（英文書）；會優先挑 natural / premium / enhanced 的聲音 |
+| `env.speaking()` | 現在是不是還在念（排下一句時用；測試模式一律 false） |
 | `env.loadImage(src)` | 載入圖片（例如皮影戲的偶），回傳 Promise |
 | `env.isResting()` | 這頁是不是靜止在畫面上 |
 
@@ -63,6 +64,8 @@ const mech = {
 - `tagMesh(text, w)` / `tagMesh(text, null, h)`：紙籤（例如原書的品名），平行頁面，`opacity` 從 0 開始。
 - `spritePlane(id, h)`：沒有卡紙背的 sprite（鳥、皮影）。
 - `softBlob(size, color)`：柔邊圓形貼圖（霧、蒸氣）。
+- `panelMesh(w, h)` → `{ mesh, draw(blocks) }`：浮在頁面上的紙卡（答題結果、說明），`draw` 吃跟 `hTextBlocks` 一樣的 block，`y: null` 會接著上一塊往下排；`opacity` 從 0 開始。
+- **同一本書的卡片要同比例**：不給 `w` / `h`，改用 `PIECES[id].h / PIECES[id].s * scale` 算高度（`s` 是切圖時的縮放），這樣原圖裡一樣大的人，立起來也一樣大。見 `toeic-part1/spreads/05-scene.js` 的 `sized()`。
 
 ## 做法（都有範例可以抄）
 
@@ -85,3 +88,4 @@ const mech = {
 - **翻頁回來時東西殘留**：`reset()` 沒還原完整（透明度、位置、`held`、光源強度）。
 - **點了沒反應**：卡片沒設 `userData.tap`；或前面有另一張可點的卡片（點擊只在可點 / 可拖的卡片之間找最近的一張，不可點的卡片不會擋）。
 - **拖曳方向反了**：`dragMove` 拿到的是讀者座標，左翻書也一樣，不要自己再鏡像。
+- **圖沒有被打包**：`build.py` 是在程式碼裡找字串 `'id'` 來決定要帶哪些切圖，`'ui-' + L` 這種拼出來的 id 找不到 → 把 id 完整寫成陣列（`['ui-a', 'ui-b', ...]`）。

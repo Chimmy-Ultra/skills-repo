@@ -139,9 +139,24 @@ function sfx(type, amt = 1) {
 }
 
 // spoken words (English books): the browser's own voices
+// a natural-sounding voice for the language when the device has one (Google, Apple's enhanced voices, ...)
+const voices = { list: [], pick: {} };
+function voiceFor(lang) {
+  if (voices.pick[lang] !== undefined) return voices.pick[lang];
+  const all = speechSynthesis.getVoices(); if (!all.length) return null;
+  const same = all.filter((v) => v.lang.replace('_', '-').toLowerCase().startsWith(lang.toLowerCase()));
+  const base = same.length ? same : all.filter((v) => v.lang.toLowerCase().startsWith(lang.slice(0, 2).toLowerCase()));
+  return (voices.pick[lang] = base.find((v) => /natural|premium|enhanced|google|samantha|siri/i.test(v.name)) || base[0] || null);
+}
+if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => (voices.pick = {});
 function say(text, lang = BOOK.lang || 'en-US', rate = 0.9) {
   if (TEST || !('speechSynthesis' in window)) return;
-  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = lang; u.rate = rate; speechSynthesis.speak(u); } catch (e) { /* no voice */ }
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = lang; u.rate = rate;
+    const v = voiceFor(lang); if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (e) { /* no voice on this device */ }
 }
 
 // ---------- build ----------
@@ -189,7 +204,7 @@ function buildSpreads() {
       card(def) { const c = new Card(def); (def.parent ? def.parent.root : book.content).add(c.root); ss.cards.push(c); return c; },
       add(obj) { book.content.add(obj); ss.extras.push(obj); },
       light(obj) { book.content.add(obj); },   // always in the scene, so the light count (and every shader) stays fixed
-      loadImage, say,
+      loadImage, say, speaking: () => !TEST && 'speechSynthesis' in window && speechSynthesis.speaking,
       sfx, isResting: () => S.mode === 'rest' && S.P === i + 1, mistFade: () => (S.P === i + 1 && !S.turn ? 1 : 0),
     };
     ss.mech = sp.build(env);

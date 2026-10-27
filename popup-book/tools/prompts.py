@@ -47,9 +47,10 @@ class Pack:
         self.title, self.batch, self.style, self.anchor, self.anchor_dir, self.notext = title, batch, style, anchor, anchor_dir, notext
         self.entries, self.rejects = [], []
 
-    def add(self, fid, title, size, body, blocks, section='', transparent=True, ref=True):
+    def add(self, fid, title, size, body, blocks, section='', transparent=True, ref=True, bleed=False):
+        """bleed=True: a full-bleed picture (a cover) that is meant to touch the image edges"""
         self.entries.append({'file': f'{fid}.png', 'title': title, 'section': section, 'size': size,
-                             'strip': STRIP in blocks, 'transparent_background': transparent,
+                             'strip': STRIP in blocks or bleed, 'transparent_background': transparent,
                              'use_style_reference': bool(ref and self.anchor and fid != self.anchor),
                              'prompt': ' '.join([self.style] + list(blocks) + [body, self.notext])})
 
@@ -71,7 +72,7 @@ class Pack:
                 md.append(f'3. Style lock: generate `{self.anchor}.png` first. Then attach it as a reference image to every other entry, if the tool accepts input images, and append: "Match the drawing style, line weight and colour palette of the reference image exactly; do not copy its subject."')
         md += ['4. Check every result by looking at it. Regenerate (up to 3 attempts per entry) when any of these is true:',
                '   - it contains any writing: characters, letters, numbers, seals, signatures or watermarks;',
-               '   - the subject is cut off by or touches the image edge' + (f' (except the strips {", ".join(strips)}, which are meant to reach the left and right edges)' if strips else '') + ';',
+               '   - the subject is cut off by or touches the image edge' + (f' (except {", ".join(strips)}, which are meant to reach the edges)' if strips else '') + ';',
                '   - a subject meant as a flat front elevation is drawn in perspective or three-quarter view, or there is ground, a cast shadow or background scenery;',
                '   - subjects on a sheet overlap each other;']
         md += [f'   - {r};' for r in self.rejects]

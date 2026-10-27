@@ -36,7 +36,9 @@ def main(book_dir):
             return True
         m = re.match(r'(.+?)(\d+)$', key)
         return bool(m and re.search(r"""['"`]%s['"`]\s*\+""" % re.escape(m.group(1)), js))
-    pieces = {k: {'w': v['w'], 'h': v['h'], 'rings': v['rings']} for k, v in P.get('pieces', {}).items() if used(k)}
+    # s: the scale the cutter applied to the source image (texture px / source px), for books that size cards
+    # by their source pixels so everything drawn at one scale stays at one scale
+    pieces = {k: {'w': v['w'], 'h': v['h'], 's': v['src'][2], 'rings': v['rings']} for k, v in P.get('pieces', {}).items() if used(k)}
     sprites = {k: v for k, v in P.get('sprites', {}).items() if used(k)}
     plan_ids = set(BOOK.get('planImages', []))
     for grp in re.findall(r"planImages:\s*\[([^\]]*)\]", js):

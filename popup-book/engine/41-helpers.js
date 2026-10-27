@@ -67,6 +67,27 @@ function tagMesh(text, w = 0.17, h = 0.034) {
   const m = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshBasicMaterial({ map: texFromCanvas(c), transparent: true, opacity: 0, depthWrite: false }));
   m.renderOrder = 7; return m;
 }
+// a paper panel lying on the page whose text can be redrawn (quiz feedback, notes). w, h: page units.
+// draw(blocks): blocks in panel coordinates (x from the left edge, y from the bottom; y: null flows below the
+// previous block), any kind drawBlock prints. Fade it in and out with mesh.material.opacity.
+function panelMesh(w, h, { px = 1400, paper = 'rgba(250,246,236,0.97)', border = VERMIL } = {}) {
+  const k = px / w, c = makeCanvas(px, Math.round(h * k)), g = c.getContext('2d'), tex = texFromCanvas(c, { mip: false });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0, depthWrite: false }));
+  mesh.renderOrder = 8;
+  const T = (x, y) => [x * k, (h - y) * k];
+  function draw(blocks) {
+    g.clearRect(0, 0, c.width, c.height);
+    g.fillStyle = paper; g.beginPath(); g.roundRect(4, 4, c.width - 8, c.height - 8, 0.012 * k); g.fill();
+    g.strokeStyle = border; g.lineWidth = 0.003 * k; g.stroke();
+    let last = null;
+    for (const b0 of blocks) {
+      const b = b0.y == null ? { ...b0, y: last ? last.y0 - (b0.space ?? 0.008) : h - 0.02 } : b0;
+      const r = drawBlock(g, T, k, b); if (r) last = r;
+    }
+    tex.needsUpdate = true;
+  }
+  return { mesh, draw, w, h };
+}
 // world position of a point on a standing card, given as fractions of its texture (u from left, v from the foot)
 function cardPoint(card, u, v) {
   const d = card.def, w = card.width, h = card.height, m = card.mirror;
