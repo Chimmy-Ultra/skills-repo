@@ -88,7 +88,7 @@ function makeScene(d) {
       function speak(card, text) {
         env.say(text);
         const m = tagFor(text), w = m.geometry.parameters.width;
-        const x = clamp(card.def.x, 0.04 + w / 2, 0.64 - w / 2);
+        const x = clamp(card.def.x, 0.07 + w / 2, 0.59 - w / 2);   // raised tags flare outward in the view: keep them well inside
         m.position.set(x, card.def.y - 0.004, (card.def.z || 0) + card.height + 0.012);
         showing.tag = m; showing.t = 0;
       }
