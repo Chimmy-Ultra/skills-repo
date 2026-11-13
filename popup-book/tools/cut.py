@@ -12,7 +12,8 @@ A sprite: trimmed RGBA, no card stock (birds, puppets, anything that floats).
 manifest items (one per line of work):
   {"piece": id, "from": image, cap, margin, keep_holes, close_k, boost, repeat}
         one subject on its own image. repeat: tile a strip n times (alternate tiles mirrored) to make it longer
-  {"sheet": [id, ...], "from": image, cap, margin, grow, split: {"k": [lo, hi]}, merge: {"src": dst}, sprite: bool, cards: {id: cap}}
+  {"sheet": [id, ...], "from": image, cap, margin, grow, split: {"k": [lo, hi]}, merge: {"src": dst}, sprite: bool, cards: {id: cap},
+   holes: {id: px}}   holes: per-id keep_holes (lattice towers, chains)
         several subjects on one image, found as connected shapes and ordered row by row, left to right.
         null ids are skipped. split: cut shape k at the emptiest column between lo..hi of its width;
         merge: join shape src into shape dst (a ball that came loose from its player).
@@ -145,7 +146,7 @@ class Cutter:
         im = self.load(name)
         return np.concatenate([im if i % 2 == 0 else im[:, ::-1] for i in range(reps)], axis=1)
 
-    def sheet(self, name, ids, cap, split=None, margin=6, grow=9, merge=None, sprite=False, cards=None):
+    def sheet(self, name, ids, cap, split=None, margin=6, grow=9, merge=None, sprite=False, cards=None, holes=None):
         im = self.load(name)
         comps = self.components(im, grow=grow)
         if merge:
@@ -170,7 +171,7 @@ class Cutter:
         for mask, pid in zip(out, ids):
             if not pid: continue
             if sprite and not (cards and pid in cards): self.sprite(pid, im, mask=mask, cap=cap)
-            else: self.cut(pid, im, mask=mask, cap=(cards or {}).get(pid, cap), margin=margin)
+            else: self.cut(pid, im, mask=mask, cap=(cards or {}).get(pid, cap), margin=margin, keep_holes=(holes or {}).get(pid, 0))
 
     def flat(self, pid, name, quality=88):
         Image.open(self.path(name)).convert('RGB').save(f'{self.out}/a/{pid}.webp', quality=quality, method=6)
@@ -202,7 +203,7 @@ class Cutter:
                 im = self.strip(it['from'], it['repeat']) if it.get('repeat') else self.load(it['from'])
                 self.cut(it['piece'], im, **opts(it, ['cap', 'margin', 'keep_holes', 'close_k', 'boost', 'flat_foot']))
             elif 'sheet' in it:
-                self.sheet(it['from'], it['sheet'], it.get('cap', 400), **opts(it, ['split', 'margin', 'grow', 'merge', 'sprite', 'cards']))
+                self.sheet(it['from'], it['sheet'], it.get('cap', 400), **opts(it, ['split', 'margin', 'grow', 'merge', 'sprite', 'cards', 'holes']))
             elif 'sprite' in it:
                 self.sprite(it['sprite'], self.load(it['from']), cap=it.get('cap', 400))
             elif 'flat' in it:

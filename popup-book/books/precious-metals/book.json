@@ -1,0 +1,19 @@
+{
+  "title": "Gold, Silver, Palladium",
+  "binding": "left",
+  "lang": "en",
+  "latinFont": "EB Garamond",
+  "aria": "Gold, Silver, Palladium: a primer on reading the precious metals markets. A book you turn with your finger.",
+  "loader": "Loading",
+  "paper": "#efe8d8",
+  "cover": { "image": "cover", "style": "label", "subtitle": "Reading the Precious Metals Markets", "seal": "金" },
+  "ui": {
+    "cover": "Cover", "back": "Back cover",
+    "open": "Drag the cover to the left to open the book",
+    "reopen": "Drag the back cover to the right to go back in",
+    "next": "Drag the right page to the left to turn it",
+    "close": "Drag the right page to the left to close the book",
+    "full": "Full screen", "unfull": "Exit full screen", "soundOn": "Sound on", "soundOff": "Sound off",
+    "noFull": "This view does not allow full screen. Open the link in Chrome and try again.", "failed": "Failed to load: "
+  }
+}

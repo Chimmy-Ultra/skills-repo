@@ -536,7 +536,7 @@ async function start() {
   const coverId = (BOOK.cover && BOOK.cover.image) || 'cover';
   const [cover, ...plans] = await Promise.all([loadImage(`a/${coverId}.webp`), ...planIds.map((id) => loadImage(`a/${id}.webp`))]);
   planIds.forEach((id, i) => (PLAN_IMG[id] = plans[i]));
-  await prepareEquations(texts.filter((t) => t.eq));
+  await prepareEquations(texts.filter((t) => t.eq).concat(SPREADS.flatMap((s) => s.eqs || [])));   // eqs: equations a spread prints itself in plan()
   coverTex = coverCanvas(cover, true); backCoverTex = coverCanvas(cover, false);
   drawArts();
   buildSpreads();

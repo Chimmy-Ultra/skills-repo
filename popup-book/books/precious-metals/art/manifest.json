@@ -1,0 +1,82 @@
+{
+ "src": [
+  "../art-src"
+ ],
+ "stock": "#f2ead8",
+ "items": [
+  {
+   "sheet": [
+    "bar-gold",
+    "bar-silver",
+    "bar-pd",
+    "knob",
+    "clerk",
+    "bonds"
+   ],
+   "from": "sheet-a",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "smelter",
+    "vault",
+    "headframe"
+   ],
+   "from": "sheet-b",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "bal-stand",
+    "bal-beam",
+    "bal-pan",
+    "crucible",
+    "miner"
+   ],
+   "from": "sheet-c",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "pv",
+    "pcb",
+    "retort",
+    "torch",
+    "coins",
+    "necklace",
+    "teapot",
+    "camera"
+   ],
+   "from": "sheet-d",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "car",
+    "ptmine",
+    "converter"
+   ],
+   "from": "sheet-e",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "ticker",
+    "glass",
+    "watch"
+   ],
+   "from": "sheet-f",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "flat": "cover",
+   "from": "cover"
+  }
+ ]
+}

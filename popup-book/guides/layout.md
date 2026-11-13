@@ -81,3 +81,12 @@ screen_y ≈ y + z · (y + 2.3) / (2.22 − z)
 - 白天：`{ el: 42–52, az: ±30–60, sun: '#fff0d8', sunI: 0.62–0.66, amb: '#e8eaee', ambI: 0.72–0.74 }`
 - 黃昏：`{ el: 14–15, az: -72, sun: '#ffb070', sunI: 0.72, amb: '#dccabf', ambI: 0.6 }`（影子很長）
 - 夜晚：`{ el: 40, az: -22, sun: '#a3b4e2', sunI: 0.26, amb: '#97a3c4', ambI: 0.56 }`，加暖色點光源（`env.light`），文字還讀得到。
+
+## 平面的文字書（沒有立體卡片）
+
+內容為主、不要機關時（例：`books/precious-metals`，英文教科書）：每個跨頁兩頁都是印在紙上的文字、表格、圖表和平面插圖。
+
+- `books/precious-metals/spreads/00-layout.js` 的 `flatSpread({ key, title, left, right })`：左右頁各是一串 item（`h1`、`h2`、`p`、`eq`、`fig`、`figs`、`table`、`chart`、`note`），從上往下流。`hbars`、`vbars`、`lineChart` 是畫在頁面上的圖表。
+- 插圖切成 sprite（manifest 的 sheet 加 `"sprite": true`），用 `c.img` 印在平面上，不帶卡紙底。
+- 在 `plan()` 裡自己印的公式要放進 spread 的 `eqs`，引擎才會先用 MathJax 排好（`texts` 裡的公式不用）。
+- 英文書的介面文字用 `book.json` 的 `"ui"` 覆蓋。
