@@ -43,3 +43,22 @@ Checked 2026-11-14. "Computed" = calculated for this book from the data files in
 - Elder, Miao & Ramchander (2012), J. Banking & Finance 36(1): https://ideas.repec.org/a/eee/jbfina/v36y2012i1p51-65.html
 - BLS schedules (CPI, PPI, Employment Situation, 8:30 ET); BEA schedule (PCE).
 - 2026 events: Reuters via Kitco (29 Jan records; 6 Feb margins), Reuters via Pakistan Today (30 Jan), Bloomberg via BNN (24 Jun), Al Jazeera (16 Sep hike), stockanalysis.com (28 Oct hold), Nation Thailand (30 Oct low), Trading Economics (12–13 Nov CPI and FedWatch odds).
+
+## Chapter 4 (history)
+- Lydian electrum lion coins under Alyattes (c. 610–560 BC); Croesus's separate gold and silver coins (c. 550 BC): World History Encyclopedia (worldhistory.org/article/797); CoinWeek; rjohara.net; British Museum via Willamette.
+- Laurion silver strike 483 BC, Themistocles' 200 triremes, Salamis 480 BC: Britannica (Themistocles); Livius; HistoryOfWar.
+- Uluburun wreck c. 1300 BC, ~10 t copper (354 ingots, mostly oxhide), ~1 t tin, Cypriot copper: Pulak 2008 (Penn State reading); Biblical Archaeology Society; Wikipedia "Oxhide ingot".
+- Potosí 1545, mita, mercury; Manila galleons (annual from 1571, route 1565–1815); Ming single-whip silver taxes: Flynn & Giráldez "Born with a silver spoon"; Kris Lane, "Potosí" (review); 15-Minute History ep. 81.
+- Newton 1717 guinea = 21 shillings; Coinage Act 1816, sovereign 1817, formal gold standard 1821: World Finance; Baldwin's; MoneyWeek.
+- Executive Order 6102 (5 Apr 1933); Gold Reserve Act (30 Jan 1934), $20.67 → $35: Wikipedia/EBSCO summaries of EO 6102 and the Gold Reserve Act.
+- UK sales: 395 t in 17 auctions, Jul 1999–Mar 2002, average ≈$275: HM Treasury FOI release (gov.uk); Washington Agreement 26 Sep 1999, 15 European central banks, 400 t/yr: Telegraph via Yahoo; Numismatic News.
+- Hunt brothers: COMEX position limits 7 Jan 1980, liquidation-only 21 Jan 1980, peak $49.45 on 17 Jan 1980, $10.80 on 27 Mar 1980: Wikipedia "Silver Thursday" (citing SEC report and Minpeco v. Hunt); Money Metals; Fortune (1980).
+- Silver 2011: five CME margin increases in about eight trading days from 25 Apr 2011, high $49.51 on 28 Apr: InvestmentNews/Bloomberg; WSJ via blog; Market Oracle.
+- Chuquicamata large-scale operations from 1915: Britannica; Codelco annual report 2015. Chile largest producer since 1983.
+- EV ≈3× copper of a combustion car: Deutsches Kupferinstitut; International Copper Association (IDTechEx: BEV 83 kg vs ICE up to 23 kg).
+- La Tolita platinum–gold work: Banco de la República (Boletín Museo del Oro); Scott & Bray (1980). Ulloa 1748: Johnson Matthey Technology Review 36(1); Gervilla et al. (Mineralogical Magazine 2020); platina thrown into rivers: Gervilla, "Edad del platino en España".
+- Russian platinum coins 1828–1845 (3, 6, 12 roubles): Platinum Metals Review 50(3) (Rehren 2006); Wikipedia.
+- Merensky Reef 1924: Cawthorn, S. Afr. J. Geol. 1999. Catalytic converters for 1975 model cars: Science History Institute, "Clean Machine".
+- Wollaston and palladium: Chemistry World, "Two men, two centuries, four metals"; Encyclopedia.com (DSB); Dictionary of National Biography; Chenevix, Phil. Trans. 1803.
+- Palladium record London fix $1,094 on 26 Jan 2001; Ford ≈$1 bn write-down announced Jan 2002: WardsAuto; USGS Mineral Industry Surveys Jan 2002; Northern Miner.
+- Plates: Gemini engravings made for this book; the standard weight in Plate is generic, not the platinum–iridium prototype.

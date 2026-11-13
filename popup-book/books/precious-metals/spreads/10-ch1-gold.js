@@ -39,6 +39,7 @@ const ch1b = flatSpread({
   ],
   right: [
     { h2: 'Investment swings the most' },
+    { figs: ['h-sovereign', 'bar-gold'], h: 0.06 },
     { p: 'Investment is the sum of bars and coins and [[ETF]] flows, and in 2025 it came to about 2,175 tonnes. It is also the most volatile part of demand. ETF holdings shrank by 3 tonnes in 2024 and grew by 801 tonnes in 2025: a swing of more than 800 tonnes in one year, larger than the whole technology sector.' },
     { h2: 'Jewellery falls when prices rise' },
     { p: 'Jewellery fabrication dropped from 2,027 tonnes in 2024 to 1,638 tonnes in 2025, while the price of gold rose to records. Jewellery buyers, concentrated in India and China, buy less metal when the price is high. Jewellery demand therefore tends to lean against the price rather than drive it.' },
@@ -55,7 +56,7 @@ const ch1c = flatSpread({
       ['2023', '1,050 t'], ['2024', '1,092 t'], ['2025', '863 t'], ['2026, Q1\u2013Q3', '675 t']] } },
     { p: 'Central banks hold gold to diversify their foreign-exchange reserves. Buying accelerated after February 2022, when Western governments froze the Russian central bank\u2019s foreign-currency assets: a reserve asset that another government can freeze is not fully safe, while gold held at home is.' },
     { p: 'In the WGC\u2019s 2026 survey of 76 central banks, 45% expected to increase their own gold holdings over the next year, a record, and 89% expected global central-bank holdings to rise. The most common reasons were gold\u2019s performance in a crisis (90%), its role as a long-term store of value (84%) and diversification (82%).' },
-    { p: 'Central banks are not trying to profit from short-term price moves, so their buying often continues when the price falls. That gives gold a buyer that most commodities lack.' },
+    { p: 'Central banks are not trading short-term price moves, so their buying often continues when the price falls.' },
   ],
   right: [
     { h2: 'How a central bank buys gold' },

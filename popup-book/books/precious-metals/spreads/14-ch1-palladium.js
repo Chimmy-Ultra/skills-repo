@@ -46,6 +46,7 @@ const ch1k = flatSpread({
     { h1: 'Palladium and platinum' },
     { p: 'Palladium and platinum can partly replace each other in catalytic converters. When palladium is much more expensive than platinum, carmakers redesign catalysts to use more platinum, and palladium demand falls. The World Platinum Investment Council estimated that platinum replaced about 620 koz of palladium in 2023 and 700 koz in 2024.' },
     { p: 'The switch works both ways, with a delay of years, because each catalyst design is fixed for a car model. Johnson Matthey notes that some new European models chose platinum-rich catalysts when palladium was dearer, and it expects that to reverse as later designs are thrifted. Traders of palladium therefore watch the palladium–platinum price gap, not just palladium’s own price.' },
+    { fig: 'converter', w: 0.16 },
     { p: 'In mid-November 2026 platinum traded near $1,486 an ounce and palladium near $1,000, so platinum was the dearer metal by about $480.' },
   ],
   right: [
@@ -73,6 +74,7 @@ const ch1l = flatSpread({
     { p: 'Gold is close to a pure monetary asset. Its new supply is small next to its stock, its industrial use is minor, and central banks buy it regardless of price. Its main variables are the real interest rate and the dollar.' },
     { p: 'Silver is a hybrid. Its monetary half follows gold, its industrial half follows the business cycle, and its small market enlarges both. In a crisis the industrial half usually wins.' },
     { p: 'Palladium is precious by definition but industrial by behaviour. Its price depends mostly on car production, the shift to electric cars, Russian supply and its price gap with platinum.' },
+    { figs: ['bar-gold', 'bar-silver', 'bar-pd'], h: 0.05 },
     { note: 'Sources for this chapter: World Gold Council (Gold Demand Trends FY2025 and Q3 2026; Central Bank Gold Reserves Survey 2026; Gold Market Primer), Silver Institute / Metals Focus (World Silver Survey 2026), Johnson Matthey (PGM Market Report 2026), SFA (Oxford) for the International Platinum Group Metals Association (2026), WPIC, USGS Mineral Commodity Summaries 2026, Bank of England, LBMA, CME Group, StoneX, Goldman Sachs via news reports, Reuters, Yahoo Finance price data.' },
   ],
 });

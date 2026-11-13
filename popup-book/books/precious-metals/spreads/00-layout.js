@@ -9,8 +9,9 @@ const TXT = { body: 0.0238, lh: 1.5, h1: 0.04, h2: 0.027, note: 0.0178 };
 const TONE = { gold: '#b88c3a', silver: '#98a2ab', pd: '#7f858c', blue: '#2d5f73', grey: '#b9b2a4', red: '#9b3b2a' };
 const fmtN = (v, d = 0) => v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
 
-function flow(c, x, items, w = PG.W, y0 = PG.TOP) {
+function flow(c, x, items, w = PG.W, y0 = PG.TOP, k = 1) {
   let y = y0;
+  const imgH = [];   // heights of the plates as printed (for fitPlates)
   const put = (b) => { const r = c.text({ x, w, ...b, y }); if (r) y = r.y0; return r; };
   for (const it of items) {
     if (it.kicker) { put({ size: 0.0165, lh: 1.4, paras: [it.kicker], color: VERMIL }); y -= 0.006; }
@@ -24,14 +25,18 @@ function flow(c, x, items, w = PG.W, y0 = PG.TOP) {
     }
     else if (it.fig) {
       const im = PLAN_IMG[it.fig]; if (!im) continue;
-      const fw = it.w || 0.24, fh = (fw * im.height) / im.width, fx = x + (it.align === 'left' ? 0 : (w - fw) / 2);
+      const fw0 = it.w || 0.24, fw = Math.min(w, fw0 * k, (0.3 * im.width) / im.height), fh = (fw * im.height) / im.width, fx = x + (it.align === 'left' ? 0 : (w - fw) / 2);
+      imgH.push(fh / (fw / fw0));
       c.img(it.fig, fx, y, fw); y -= fh + 0.008;
       if (it.cap) { const r = c.text({ x: x + w / 2, y, w, size: TXT.note, lh: 1.4, italic: true, align: 'center', paras: [it.cap], color: '#5a4b3d' }); if (r) y = r.y0; }
       y -= 0.012;
     }
     else if (it.figs) {   // several plates in a row, all the same height
-      const ims = it.figs.map((id) => PLAN_IMG[id]).filter(Boolean), fh = it.h || 0.08, gap = 0.02;
+      const ims = it.figs.map((id) => PLAN_IMG[id]).filter(Boolean), gap = 0.02, h0 = it.h || 0.08;
+      const w1 = ims.reduce((a, im) => a + (h0 * im.width) / im.height, 0);
+      const fh = Math.min(h0 * k, 0.3, (h0 * (w - gap * (ims.length - 1))) / w1);
       const ws = ims.map((im) => (fh * im.width) / im.height), tot = ws.reduce((a, b) => a + b, 0) + gap * (ims.length - 1);
+      imgH.push(h0);
       let fx = x + (w - tot) / 2;
       ims.forEach((im, i) => { c.img(it.figs[i], fx, y, ws[i]); fx += ws[i] + gap; });
       y -= fh + 0.008;
@@ -42,7 +47,21 @@ function flow(c, x, items, w = PG.W, y0 = PG.TOP) {
     else if (it.chart) y -= it.chart(c, x, y, w) + 0.014;
     else if (it.gap) y -= it.gap;
   }
+  flow.imgH = imgH;
   return y;
+}
+
+// print a page with its plates enlarged to use the empty space at the bottom (a dry run measures first)
+const PG_BOTTOM = -0.405;
+function fitFlow(c, x, items, w, y0) {
+  c.g.save(); c.g.beginPath(); c.g.rect(0, 0, 0, 0); c.g.clip();
+  const n0 = c.rects.length, end = flow(c, x, items, w, y0, 1), H = flow.imgH.reduce((a, b) => a + b, 0);
+  c.rects.length = n0;
+  c.g.restore();
+  const k = H > 0 ? Math.max(0.45, Math.min(2.4, 1 + (end - PG_BOTTOM) / H)) : 1;   // shrink plates if the text runs too low
+  const end2 = flow(c, x, items, w, y0, k);
+  if (end2 < PG_BOTTOM - 0.004) console.warn('page runs under the hint bar: ' + ((items.find((it) => it.h1 || it.h2) || {}).h1 || (items.find((it) => it.h2) || {}).h2) + ' end=' + end2.toFixed(3));
+  return end2;
 }
 
 // a ruled table; cols: column widths as fractions of w; align: 'l' | 'r' per column
@@ -113,7 +132,7 @@ function flatSpread({ key, title, left, right, images = [] }) {
     planImages: platesOf(images, all),
     eqs: all.filter((it) => it.eq).map((it) => ({ eq: it.eq })),
     texts: [],
-    plan(c) { flow(c, PG.L, left); flow(c, PG.R, right, PG.W, PG.TOP - 0.035); },   // the right page starts below the screen buttons
+    plan(c) { fitFlow(c, PG.L, left, PG.W, PG.TOP); fitFlow(c, PG.R, right, PG.W, PG.TOP - 0.035); },   // the right page starts below the screen buttons
     build() { return { home: false, reset() {}, update() { return false; } }; },
   };
 }

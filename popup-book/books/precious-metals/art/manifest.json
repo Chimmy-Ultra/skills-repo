@@ -75,6 +75,67 @@
    "sprite": true
   },
   {
+   "sheet": [
+    "h-lion",
+    "h-owl",
+    "h-oxhide",
+    "h-axe",
+    "h-trireme"
+   ],
+   "from": "sheet-g",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "h-potosi",
+    "h-galleon",
+    "h-eights",
+    "h-panner",
+    "h-sluice"
+   ],
+   "from": "sheet-h",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "h-cable",
+    "h-coil",
+    "h-pit",
+    "h-lab",
+    "h-kilo"
+   ],
+   "from": "sheet-i",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "h-pit-traders",
+    "h-silverstack",
+    "h-film",
+    "h-mask",
+    "h-rouble",
+    "h-car70"
+   ],
+   "from": "sheet-j",
+   "cap": 900,
+   "sprite": true
+  },
+  {
+   "sheet": [
+    "h-sovereign",
+    "h-note",
+    "h-safe",
+    "h-weigh",
+    "h-hotel"
+   ],
+   "from": "sheet-k",
+   "cap": 900,
+   "sprite": true
+  },
+  {
    "flat": "cover",
    "from": "cover"
   }
