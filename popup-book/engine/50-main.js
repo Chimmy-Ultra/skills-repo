@@ -195,7 +195,7 @@ function coverCanvas(img, front) {
       g.fillStyle = gr; g.fillText(BOOK.title, W / 2, ty, W * 0.86);
       const cols = cv.rule || [], ry = ty + ts * 0.78, rw = W * 0.3, seg = rw / Math.max(1, cols.length);
       cols.forEach((col, i) => { g.fillStyle = col; g.fillRect(W / 2 - rw / 2 + i * seg, ry, seg - H * 0.003, H * 0.0035); });
-      if (cv.subtitle) { g.font = `italic ${(H * 0.026).toFixed(0)}px ${fontStack()}`; g.fillStyle = '#4a3a2a'; g.fillText(cv.subtitle, W / 2, ry + H * 0.038, W * 0.8); }
+      if (cv.subtitle) { g.font = `${cv.italic === false ? '' : 'italic '}${(H * 0.026).toFixed(0)}px ${fontStack()}`; g.fillStyle = '#4a3a2a'; g.fillText(cv.subtitle, W / 2, ry + H * 0.038, W * 0.8); }
     }
   } else {
     // back board: the cover art without the title

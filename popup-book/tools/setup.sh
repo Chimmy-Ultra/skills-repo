@@ -10,6 +10,7 @@ mkdir -p vendor/fonts
 [ -f vendor/package.json ] || echo '{"private": true}' > vendor/package.json
 [ -d vendor/node_modules/three ] && [ -d vendor/node_modules/mathjax ] && [ -d vendor/node_modules/@fontsource/eb-garamond ] || \
   npm install --prefix vendor --no-audit --no-fund --silent three@0.169.0 mathjax@3.2.2 @fontsource/eb-garamond@5.1.0
+[ -d vendor/node_modules/@fontsource/noto-serif-tc ] || npm install --prefix vendor --no-audit --no-fund --silent @fontsource/noto-serif-tc
 [ -s vendor/fonts/wt071.ttf ] || curl -sSL -o vendor/fonts/wt071.ttf https://raw.githubusercontent.com/dictcp/wangfonts/master/TrueType/wt071.ttf
 python3 -c "from playwright.sync_api import sync_playwright" 2>/dev/null || echo "playwright for Python is missing: pip install playwright (and a Chromium for it)"
 echo "setup ok: $(ls vendor/node_modules | tr '\n' ' ')fonts: $(ls vendor/fonts)"

@@ -21,7 +21,7 @@ const STOCK = BOOK.stock || '#f2ead8';      // card stock (back of the die-cut p
 const PAPER = BOOK.paper || '#efe5cf';      // page paper
 const INK = BOOK.ink || '#2a2119';
 const VERMIL = BOOK.accent || '#a83f2c';
-const FONT = 'HWXing';                       // 王漢宗中行書, embedded by the build
+const FONT = BOOK.cjkFont ? 'BodyCJK' : 'HWXing';   // book.json cjkFont (e.g. 'Noto Serif TC') or 王漢宗中行書; embedded by the build
 const LATIN = BOOK.latinFont || null;        // e.g. 'EB Garamond' for English or physics books
 const fontStack = () => (LATIN ? `"${LATIN}", ${FONT}, "Kaiti TC", serif` : `${FONT}, "Kaiti TC", serif`);
 const V3 = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);

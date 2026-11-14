@@ -10,7 +10,7 @@ Only the art the code actually references is shipped.
 """
 import base64, glob, io, json, os, re, shutil, sys
 import logging
-from fontTools import subset, ttLib
+from fontTools import merge, subset, ttLib
 logging.getLogger('fontTools').setLevel(logging.ERROR)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,16 +61,39 @@ def main(book_dir):
     html = open(f'{ROOT}/engine/index.html', encoding='utf-8').read()
     ui_text = json.dumps(BOOK, ensure_ascii=False)
     chars = set(c for c in (js + html + ui_text) if ord(c) > 0x2000) | set('﹁﹂﹃﹄︽︾︵︶')
-    f = ttLib.TTFont(BRUSH)
-    cmap = f.getBestCmap()
-    glyf = f['glyf'] if 'glyf' in f else None
-    empty = {c for c in chars if glyf is not None and not c.isspace() and ord(c) in cmap and glyf[cmap[ord(c)]].numberOfContours == 0}
-    missing = sorted(c for c in chars if 0x4e00 <= ord(c) <= 0x9fff and ord(c) not in cmap)
-    keep = chars - empty
-    o = subset.Options(); o.flavor = 'woff2'; o.notdef_outline = True
-    s = subset.Subsetter(o); s.populate(text=''.join(sorted(keep))); s.subset(f)
-    buf = io.BytesIO(); f.flavor = 'woff2'; f.save(buf)
-    css = [f"@font-face{{font-family:'HWXing';font-weight:400;font-style:normal;font-display:block;src:url(data:font/woff2;base64,{base64.b64encode(buf.getvalue()).decode()}) format('woff2');}}"]
+    if BOOK.get('cjkFont'):
+        # a plain text face (e.g. 'Noto Serif TC' from @fontsource): its unicode-range chunks, each subset to the
+        # characters used, merged into one font per weight
+        fam, empty, missing = 'BodyCJK', set(), []
+        slug = BOOK['cjkFont'].lower().replace(' ', '-')
+        css, size, keep = [], 0, chars
+        for weight in (400, 600):
+            parts = []
+            for p in sorted(glob.glob(f'{VENDOR}/node_modules/@fontsource/{slug}/files/{slug}-*-{weight}-normal.woff2')):
+                t = ttLib.TTFont(p)
+                have = ''.join(c for c in chars if ord(c) in t.getBestCmap())
+                if not have: continue
+                o = subset.Options(); o.notdef_outline = True; o.layout_features = ['*']
+                s_ = subset.Subsetter(o); s_.populate(text=have); s_.subset(t)
+                t.flavor = None; q = f'/tmp/_cjk_{weight}_{len(parts)}.ttf'; t.save(q); parts.append(q)
+            if not parts: sys.exit('cjkFont files missing: npm install --prefix vendor @fontsource/' + slug)
+            mf = merge.Merger().merge(parts) if len(parts) > 1 else ttLib.TTFont(parts[0])
+            buf = io.BytesIO(); mf.flavor = 'woff2'; mf.save(buf); size += len(buf.getvalue())
+            if weight == 400: cm = mf.getBestCmap(); missing = sorted(c for c in chars if 0x4e00 <= ord(c) <= 0x9fff and ord(c) not in cm)
+            css.append(f"@font-face{{font-family:'{fam}';font-weight:{weight};font-style:normal;font-display:block;src:url(data:font/woff2;base64,{base64.b64encode(buf.getvalue()).decode()}) format('woff2');}}")
+        buf = io.BytesIO(b'x' * size)
+    else:
+        fam = 'HWXing'
+        f = ttLib.TTFont(BRUSH)
+        cmap = f.getBestCmap()
+        glyf = f['glyf'] if 'glyf' in f else None
+        empty = {c for c in chars if glyf is not None and not c.isspace() and ord(c) in cmap and glyf[cmap[ord(c)]].numberOfContours == 0}
+        missing = sorted(c for c in chars if 0x4e00 <= ord(c) <= 0x9fff and ord(c) not in cmap)
+        keep = chars - empty
+        o = subset.Options(); o.flavor = 'woff2'; o.notdef_outline = True
+        s = subset.Subsetter(o); s.populate(text=''.join(sorted(keep))); s.subset(f)
+        buf = io.BytesIO(); f.flavor = 'woff2'; f.save(buf)
+        css = [f"@font-face{{font-family:'HWXing';font-weight:400;font-style:normal;font-display:block;src:url(data:font/woff2;base64,{base64.b64encode(buf.getvalue()).decode()}) format('woff2');}}"]
     latin = BOOK.get('latinFont')
     if latin:
         slug = latin.lower().replace(' ', '-')
@@ -80,7 +103,7 @@ def main(book_dir):
                 print('latin font file missing:', p, '(npm install --prefix vendor @fontsource/%s)' % slug); continue
             b64 = base64.b64encode(open(p, 'rb').read()).decode()
             css.append(f"@font-face{{font-family:'{latin}';font-weight:{weight};font-style:{style};font-display:block;src:url(data:font/woff2;base64,{b64}) format('woff2');}}")
-    ui_font = (f'"{latin}", ' if latin else '') + '"HWXing", "Kaiti TC", "STKaiti", serif'
+    ui_font = (f'"{latin}", ' if latin else '') + f'"{fam}", "Kaiti TC", "STKaiti", serif'
     fill = {'%%FONTS%%': '\n'.join(css), '%%UIFONT%%': ui_font, '%%TITLE%%': BOOK['title'],
             '%%ARIA%%': BOOK.get('aria', BOOK['title'] + '：可以用手指翻頁的立體書'),
             '%%LOADER%%': BOOK.get('loader', '研墨中'), '%%TURNHINT%%': BOOK.get('turnHint', '橫拿手機，書會更大')}
