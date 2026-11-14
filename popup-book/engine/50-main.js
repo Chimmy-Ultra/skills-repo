@@ -183,6 +183,19 @@ function coverCanvas(img, front) {
       g.font = `${(H * 0.058).toFixed(0)}px ${fontStack()}`; g.fillText(BOOK.title, W / 2, by + bh * (cv.subtitle ? 0.4 : 0.5), bw * 0.9);
       if (cv.subtitle) { g.font = `${(H * 0.026).toFixed(0)}px ${fontStack()}`; g.fillStyle = '#4a3a2a'; g.fillText(cv.subtitle, W / 2, by + bh * 0.74, bw * 0.9); }
       if (cv.seal) seal(g, bx + bw - H * 0.05, by + bh + H * 0.02, H * 0.034, cv.seal);
+    } else if (style === 'open') {
+      // title printed straight onto the art (for art with an empty band at the top): gilt title,
+      // a rule in the colours of cv.rule, italic subtitle. cv.y: title centre as a fraction of the height
+      const ty = H * (cv.y || 0.12), ts = H * (cv.size || 0.056);
+      g.textAlign = 'center'; g.textBaseline = 'middle';
+      g.font = `600 ${ts.toFixed(0)}px ${fontStack()}`;
+      const gr = g.createLinearGradient(0, ty - ts * 0.55, 0, ty + ts * 0.45);
+      gr.addColorStop(0, '#d9b45a'); gr.addColorStop(0.45, '#a87a26'); gr.addColorStop(0.55, '#8c621c'); gr.addColorStop(1, '#c39a43');
+      g.lineJoin = 'round'; g.lineWidth = ts * 0.018; g.strokeStyle = 'rgba(70,46,14,0.55)'; g.strokeText(BOOK.title, W / 2, ty, W * 0.86);
+      g.fillStyle = gr; g.fillText(BOOK.title, W / 2, ty, W * 0.86);
+      const cols = cv.rule || [], ry = ty + ts * 0.78, rw = W * 0.3, seg = rw / Math.max(1, cols.length);
+      cols.forEach((col, i) => { g.fillStyle = col; g.fillRect(W / 2 - rw / 2 + i * seg, ry, seg - H * 0.003, H * 0.0035); });
+      if (cv.subtitle) { g.font = `italic ${(H * 0.026).toFixed(0)}px ${fontStack()}`; g.fillStyle = '#4a3a2a'; g.fillText(cv.subtitle, W / 2, ry + H * 0.038, W * 0.8); }
     }
   } else {
     // back board: the cover art without the title

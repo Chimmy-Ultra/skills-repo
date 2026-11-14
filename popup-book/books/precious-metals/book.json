@@ -6,7 +6,7 @@
   "aria": "Gold, Silver, Palladium: a primer on reading the precious metals markets. A book you turn with your finger.",
   "loader": "Loading",
   "paper": "#efe8d8",
-  "cover": { "image": "cover", "style": "label", "subtitle": "Reading the Precious Metals Markets", "seal": "金" },
+  "cover": {"image": "cover", "style": "open", "y": 0.13, "rule": ["#b88c3a", "#a9b2ba", "#6f757c"], "subtitle": "Reading the Precious Metals Markets"},
   "ui": {
     "cover": "Cover", "back": "Back cover",
     "open": "Drag the cover to the left to open the book",
