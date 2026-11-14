@@ -5,7 +5,7 @@
 //   { fig, w, cap }  a Gemini plate printed flat      { table: { cols, head, rows, align } }
 //   { chart: (c, x, yTop, w) => height }               { note }  small grey text      { gap }
 const PG = { L: -0.6, R: 0.072, W: 0.53, TOP: 0.448 };
-const TXT = { body: 0.0262, lh: 1.65, h1: 0.042, h2: 0.029, note: 0.019 };
+const TXT = { body: 0.0245, lh: 1.6, h1: 0.04, h2: 0.0275, note: 0.0185 };
 const ART_READY = ['f-cooktop', 'f-pan', 'f-pasta', 'f-packet', 'f-butter', 'f-beef', 'p-ends', 'p-pressed', 'p-pour', 'p-sauce', 'p-beef', 'p-wipe'];
 const TONE = { gold: '#b88c3a', silver: '#98a2ab', pd: '#7f858c', blue: '#2d5f73', grey: '#b9b2a4', red: '#9b3b2a' };
 const fmtN = (v, d = 0) => v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -59,7 +59,7 @@ function fitFlow(c, x, items, w, y0) {
   const n0 = c.rects.length, end = flow(c, x, items, w, y0, 1), H = flow.imgH.reduce((a, b) => a + b, 0);
   c.rects.length = n0;
   c.g.restore();
-  const k = H > 0 ? Math.max(0.45, Math.min(2.4, 1 + (end - PG_BOTTOM) / H)) : 1;   // shrink plates if the text runs too low
+  const k = H > 0 ? Math.max(0.45, Math.min(1, 1 + (end - PG_BOTTOM) / H)) : 1;   // plates never grow past their set size   // shrink plates if the text runs too low
   const end2 = flow(c, x, items, w, y0, k);
   if (end2 < PG_BOTTOM - 0.004) console.warn('page runs under the hint bar: ' + ((items.find((it) => it.h1 || it.h2) || {}).h1 || (items.find((it) => it.h2) || {}).h2) + ' end=' + end2.toFixed(3));
   return end2;

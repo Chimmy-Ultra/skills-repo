@@ -1,1 +1,1 @@
-const SPREADS = [sp1, sp2, sp3, sp4, sp5];
+const SPREADS = [intro, pasta1, pasta2];
