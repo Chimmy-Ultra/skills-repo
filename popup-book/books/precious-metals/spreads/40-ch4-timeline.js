@@ -1,4 +1,4 @@
-// ======================= Chapter 4 helper: a five-lane timeline on a broken time axis =======================
+// ======================= Chapter 5 helper: a five-lane timeline on a broken time axis =======================
 // x axis in three equal segments: 9000 BC – AD 0, AD 0 – 1800, 1800 – 2030 (each segment linear).
 function tlX(year, x0, x1) {
   const seg = (x1 - x0) / 3;

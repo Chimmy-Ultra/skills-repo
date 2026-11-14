@@ -11,7 +11,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOOK = os.path.dirname(HERE)
 FLAT = {'cover'}                       # flat textures keep their background
-HOLES = {'sheet-b', 'sheet-c', 'sheet-e', 'sheet-g', 'sheet-i', 'sheet-j', 'sheet-k'}         # also clear big enclosed white areas (lattice, chains)
+HOLES = {'sheet-b', 'sheet-c', 'sheet-e', 'sheet-g', 'sheet-i', 'sheet-j', 'sheet-k', 'sheet-q'}         # also clear big enclosed white areas (lattice, chains)
 
 
 def cutout(rgb, holes=False):

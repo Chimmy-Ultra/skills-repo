@@ -1,4 +1,4 @@
-// ======================= Chapter 2 (short): beta and residuals =======================
+// ======================= Chapter 3 (short): beta and residuals =======================
 // Data: Yahoo Finance front-month futures GC=F / SI=F, daily closes, computed 2026-11-14 (see data/ch2_beta.md).
 const CH2_CUM = '25-11-21:-1.0,25-11-28:6.6,25-12-05:10.5,25-12-12:13.3,25-12-19:20.5,25-12-26:29.9,26-01-02:29.1,26-01-09:36.3,26-01-16:45.3,26-01-23:49.6,26-01-30:36.9,26-02-06:29.6,26-02-13:30.2,26-02-20:35.4,26-02-27:43.8,26-03-06:36.1,26-03-13:35.1,26-03-20:32.0,26-03-27:34.6,26-04-10:36.4,26-04-17:41.2,26-04-24:38.0,26-05-01:40.0,26-05-08:43.7,26-05-15:44.8,26-05-22:44.2,26-05-29:42.0,26-06-05:39.0,26-06-12:41.1,26-06-26:32.0,26-07-10:32.7,26-07-17:29.1,26-07-24:32.2,26-07-31:29.4,26-08-07:30.7,26-08-14:32.3,26-08-21:32.6,26-08-28:33.0,26-09-04:33.0,26-09-11:32.7,26-09-18:35.3,26-09-25:34.7,26-10-02:32.4,26-10-09:32.0,26-10-16:27.0,26-10-23:26.2,26-10-30:20.7,26-11-06:20.9,26-11-13:20.6';
 const CH2_T0 = Date.UTC(2025, 10, 14);
@@ -22,9 +22,9 @@ function ch2Chart(c, x, y, w) {
 }
 
 const ch2a = flatSpread({
-  key: 'ch2-model', title: 'Chapter 2: One move, two parts',
+  key: 'ch2-model', title: 'Chapter 3: One move, two parts',
   left: [
-    { kicker: 'Chapter 2 · Beta and residuals' },
+    { kicker: 'Chapter 3 · Beta and residuals' },
     { h1: 'One move, two parts' },
     { p: 'When silver falls 2% on a day gold barely moves, the natural reaction is to look for a silver headline. A faster first step is to ask how much of silver’s move gold already explains. The part gold explains comes from the shared macro drivers of Chapter 1: real rates and the dollar. Only the part left over needs a silver-specific reason.' },
     { h2: 'Returns, not prices' },
@@ -46,7 +46,7 @@ const ch2a = flatSpread({
 });
 
 const ch2b = flatSpread({
-  key: 'ch2-numbers', title: 'Chapter 2: The numbers, and why one day says little',
+  key: 'ch2-numbers', title: 'Chapter 3: The numbers, and why one day says little',
   left: [
     { h2: 'Real numbers' },
     { p: 'The table uses daily closes of the front-month gold and silver futures in two windows. The second window covers the London silver squeeze and the crash that followed.' },
@@ -68,7 +68,7 @@ const ch2b = flatSpread({
 });
 
 const ch2c = flatSpread({
-  key: 'ch2-cumulative', title: 'Chapter 2: Reading a cumulative residual',
+  key: 'ch2-cumulative', title: 'Chapter 3: Reading a cumulative residual',
   left: [
     { h2: 'A year of silver against gold' },
     { chart: ch2Chart },

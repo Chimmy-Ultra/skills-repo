@@ -1,4 +1,4 @@
-// ======================= Chapter 3: how macro reaches metal prices =======================
+// ======================= Chapter 4: how macro reaches metal prices =======================
 // Data: FRED (DFII10, T10YIE, DTWEXBGS) quarterly averages 2006Q1–2026Q3; Yahoo GC=F quarterly averages
 // (data/fred_quarterly.csv). Studies: Erb & Harvey (2013), Chicago Fed Letter 464 (2021), WGC (May 2022), ECB (June 2025),
 // Hanson & Stein (2015), Elder, Miao & Ramchander (2012), CME FedWatch methodology. Dated 2026 events: Reuters, Al Jazeera,
@@ -26,9 +26,9 @@ function chain(steps, { bh = 0.044, gap = 0.024, size = 0.0185 } = {}) {
 }
 
 const ch3a = flatSpread({
-  key: 'ch3-rates', title: 'Chapter 3: Three interest rates',
+  key: 'ch3-rates', title: 'Chapter 4: Three interest rates',
   left: [
-    { kicker: 'Chapter 3 · How macro reaches metal prices' },
+    { kicker: 'Chapter 4 · How macro reaches metal prices' },
     { h1: 'Three interest rates' },
     { p: 'Chapter 1 showed that gold competes with a safe bond, and that the bond’s return after inflation, the real rate, sets the cost of holding gold. This chapter follows how economic news changes that rate and how the change reaches gold and silver.' },
     { p: 'Three rates belong together. The [[nominal yield]] is what a Treasury bond pays. The [[real yield]] is what an inflation-protected Treasury (TIPS) pays above inflation. The difference between them is the [[breakeven inflation rate]], the average inflation at which the two bonds would pay the same:' },
@@ -47,7 +47,7 @@ const ch3a = flatSpread({
 });
 
 const ch3b = flatSpread({
-  key: 'ch3-gold-tips', title: 'Chapter 3: Gold and the real yield',
+  key: 'ch3-gold-tips', title: 'Chapter 4: Gold and the real yield',
   left: [
     { h1: 'Gold and the real yield' },
     { chart: lineChart({ pts: pts(Q_GOLD), n: 84, ymin: 0, ymax: 5000, ticks: [1000, 3000, 5000], h: 0.12, xl: QX, marks: [[64, 'Feb 2022']], tone: TONE.gold, fmt: (v) => '$' + fmtN(v), title: 'Gold, US$/oz' }) },
@@ -65,7 +65,7 @@ const ch3b = flatSpread({
 });
 
 const ch3c = flatSpread({
-  key: 'ch3-break', title: 'Chapter 3: The break after 2022',
+  key: 'ch3-break', title: 'Chapter 4: The break after 2022',
   left: [
     { h1: 'The break after 2022' },
     { p: 'From the end of 2021 to the end of 2023 the ten-year real yield rose by about 3.2 percentage points, from −1.0% to +2.2%. The pre-2022 relationship says gold should have fallen by about a third:' },
@@ -85,7 +85,7 @@ const ch3c = flatSpread({
 });
 
 const ch3d = flatSpread({
-  key: 'ch3-dollar', title: 'Chapter 3: The dollar',
+  key: 'ch3-dollar', title: 'Chapter 4: The dollar',
   left: [
     { h1: 'The dollar' },
     { p: 'Gold is quoted in US dollars everywhere. When the dollar strengthens, a buyer who pays in euros, yen or rupees needs more of their own currency for each ounce, so demand outside the US falls and the dollar price of gold tends to fall. The same applies to silver.' },
@@ -104,7 +104,7 @@ const ch3d = flatSpread({
 });
 
 const ch3e = flatSpread({
-  key: 'ch3-fed', title: 'Chapter 3: Reading the Fed’s next move',
+  key: 'ch3-fed', title: 'Chapter 4: Reading the Fed’s next move',
   left: [
     { h1: 'Reading the Fed’s next move' },
     { p: 'Gold reacts to what the Federal Reserve is expected to do, not only to what it has done. By the time the Fed raises its rate, markets have usually priced the move in. Two market numbers show the expected path.' },
@@ -125,7 +125,7 @@ const ch3e = flatSpread({
 });
 
 const ch3f = flatSpread({
-  key: 'ch3-data-days', title: 'Chapter 3: Data release days',
+  key: 'ch3-data-days', title: 'Chapter 4: Data release days',
   left: [
     { h1: 'Data release days' },
     { table: { cols: [0.48, 0.26, 0.26], size: 0.0192, head: ['Release', 'Agency', 'Time (ET)'], align: ['l', 'l', 'r'], rows: [
@@ -144,7 +144,7 @@ const ch3f = flatSpread({
 });
 
 const ch3g = flatSpread({
-  key: 'ch3-2026', title: 'Chapter 3: 2026, the year rates turned',
+  key: 'ch3-2026', title: 'Chapter 4: 2026, the year rates turned',
   left: [
     { h1: '2026: the year rates turned' },
     { table: { cols: [0.25, 0.75], size: 0.0185, head: ['Date', 'Event'], align: ['l', 'l'], rows: [

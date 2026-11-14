@@ -1,4 +1,4 @@
-# Sources — Gold, Silver, Palladium (chapters 1–3)
+# Sources — Gold, Silver, Palladium (chapters 1–5)
 
 Checked 2026-11-14. "Computed" = calculated for this book from the data files in `data/`.
 
@@ -26,10 +26,29 @@ Checked 2026-11-14. "Computed" = calculated for this book from the data files in
 - WPIC (Jan 2024), platinum-for-palladium substitution 620/700 koz: https://platinuminvestment.com/investment-research/perspectives/platinum-for-palladium-substitution-is-embedded-into-automotive-demand-and-unlikely-to-reverse-swiftly
 - Palladium record $3,440 on 7 Mar 2022 (CNBC/Reuters): https://www.cnbc.com/amp/2022/03/07/gold-markets-palladium-russia-ukraine-crisis.html ; Jan 2001 ≈$1,090 (Coin World); 2026 levels: Trading Economics palladium/platinum pages.
 
-## Chapter 2
-- Daily closes GC=F, SI=F from Yahoo Finance chart API, 2023-11 to 2026-11-13. Computed: β, ρ, σ for both windows; cumulative residual with β = 1.201. See `data/ch2_beta.md`.
+## Chapter 2 (from mine to market)
+
+Checked November 2026. Plates: Gemini engravings, sheets l–r (anonymous figures only).
+
+- Mine lead times: S&P Global Market Intelligence, *Mine Development Times: The U.S. in Perspective* (July 2024) and coverage (mining.com, Mining Weekly): gold mines 15.2 years from discovery to production on average, fastest of the metals studied.
+- Ore grade: Newmont, 2022 reserves release (Feb 2023): average gold reserve grade 1.09 g/t. 31.1035 / 1.09 = 28.5 t per oz.
+- Leaching chemistry and CIP: W. Stange, "The process design of gold leaching and carbon-in-pulp circuits", J. S. Afr. Inst. Min. Metall. 99 (1999) — Elsner equation, pH 9.5–11 to limit HCN, carbon held by screens, elution gives a small volume of rich solution. Coconut-shell carbon: US Bureau of Mines review (CDC stacks 219762). Waihi mine (OceanaGold) ore-processing page: electrowinning on stainless-steel cathodes, doré 75–90% silver, 10–25% gold. LBMA "Wonders of gold: doré pour": South African doré about 10% silver.
+- Silver routes: World Silver Survey 2026 shares (Chapter 1). Parkes process (zinc added to lead bullion; silver concentrates in the zinc crust): emew technical notes; Parkes patent 1850. Copper anode slime carries silver and gold: US patents 4,229,270 and 3,996,046.
+- Norilsk: Nornickel annual reports 2020, 2022, sustainability report 2023 — Taimyr, linked by Yenisey, Northern Sea Route and air; slurry pipelines to Nadezhda; converter matte; PGM refining by tolling at Krastsvetmet, URALINTECH, Prioksky.
+- South Africa: Valterra Platinum "Mine to market — processing operations" (concentrator, smelter, converter, BMR, PMR); Daily Maverick (Sept 2025) on the Anglo American Platinum demerger. Reef widths: Southern Palladium (UG2 ≈ 73 cm, Merensky ≈ 2 m at Bengwenyama), Western Platinum mine record (Merensky 1.2 m). Ore grade 2–6 g/t PGMs: IPA "Secondary Production" fact sheet.
+- Refining: Britannica, "Gold processing — refining" (fire assay, Miller ≈ 99.5%, Wohlwill ≈ 99.99%); Miller patent 1867, Wohlwill 1874.
+- Good Delivery: LBMA Good Delivery Rules, technical specifications (gold 350–430 fine oz, min 995.0; marks; MMYY since 2019); LBMA OTC guide (silver 750–1,100 oz, min 999.0; platinum and palladium 1–6 kg, ≥ 99.95%; >90% of trading clears over unallocated accounts). LBMA financial-crime brochure: bars leaving vault custody stop being Good Delivery until re-accepted; accredited refiners ≈ 90% of annual gold production.
+- Transport: Bloomberg via mining.com (Feb 2025): gold flown between London, New York, Zurich, Hong Kong, Shanghai in passenger-plane holds in sealed wooden boxes, silver usually by ship; COMEX needs 100-oz or kilobars. Mining.com: Brink's, G4S, Loomis, Malca-Amit. BullionStar (Feb 2025): COMEX April $2,862 vs London $2,798 on 31 Jan 2025; FT: BoE withdrawal wait four to eight weeks. Fortune (31 Jan 2025): 393 t moved into COMEX since the election.
+- Vaults: LBMA London vault data, end-October 2026: 9,850 t gold (≈ 787,993 bars at 12.5 kg), 28,889 t silver. COMEX stocks 2 Oct 2026 (from CME depository reports, via metalcharts.org): gold 15.1 Moz registered, 8.4 eligible; silver 101.1 / 236.5 Moz.
+- Shanghai: SGE standards SGEB1-2019 / SGEB2-2019; BullionStar on imports sold first through the SGE.
+- Swiss exports: Swiss customs via Reuters (20 Feb 2025), January 2024 vs January 2025, kg; Kitco / Reuters (Sept 2025): August 2025 US 0.3 t, China 35 t; kilobar tariff ruling and September exemption.
+- End use: WGC India gold market series (22-carat dominance); Business Standard (China 24-carat). CRU for the Silver Institute via pv magazine (2019): silver per cell 400 mg (2007) → 130 mg (2016).
+- Recycling: Chapter 1 (WGC 2025 recycling 1,404 t). Ecotrade Group (decanning, milling, sampling, smelting). IPA fact sheet: autocatalyst ceramic ≈ 2,000 g/t PGMs vs primary ore 2–6 g/t; up to 95% recovery. CME Group (2023): autocatalyst recycling lag ≈ 13 years.
 
 ## Chapter 3
+- Daily closes GC=F, SI=F from Yahoo Finance chart API, 2023-11 to 2026-11-13. Computed: β, ρ, σ for both windows; cumulative residual with β = 1.201. See `data/ch2_beta.md`.
+
+## Chapter 4
 - FRED DFII10, T10YIE, DGS10, DGS2, DTWEXBGS (quarterly averages in `data/fred_quarterly.csv`; daily extremes: −1.19% on 2021-08-03, 2.95% on 2026-10-05, 2.86% on 2026-11-12).
 - Gold quarterly averages: Yahoo Finance GC=F. Computed correlations and the −0.14 regression slope.
 - Erb & Harvey, "The Golden Dilemma", FAJ 2013: https://people.duke.edu/~charvey/Research/Published_Papers/P113_The_golden_dilemma.pdf
@@ -44,7 +63,7 @@ Checked 2026-11-14. "Computed" = calculated for this book from the data files in
 - BLS schedules (CPI, PPI, Employment Situation, 8:30 ET); BEA schedule (PCE).
 - 2026 events: Reuters via Kitco (29 Jan records; 6 Feb margins), Reuters via Pakistan Today (30 Jan), Bloomberg via BNN (24 Jun), Al Jazeera (16 Sep hike), stockanalysis.com (28 Oct hold), Nation Thailand (30 Oct low), Trading Economics (12–13 Nov CPI and FedWatch odds).
 
-## Chapter 4 (history)
+## Chapter 5 (history)
 - Lydian electrum lion coins under Alyattes (c. 610–560 BC); Croesus's separate gold and silver coins (c. 550 BC): World History Encyclopedia (worldhistory.org/article/797); CoinWeek; rjohara.net; British Museum via Willamette.
 - Laurion silver strike 483 BC, Themistocles' 200 triremes, Salamis 480 BC: Britannica (Themistocles); Livius; HistoryOfWar.
 - Uluburun wreck c. 1300 BC, ~10 t copper (354 ingots, mostly oxhide), ~1 t tin, Cypriot copper: Pulak 2008 (Penn State reading); Biblical Archaeology Society; Wikipedia "Oxhide ingot".

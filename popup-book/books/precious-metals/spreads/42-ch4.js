@@ -1,5 +1,5 @@
-// ======================= Chapter 4: a short history of five metals (plain English) =======================
-// Facts checked against the sources listed in sources.md (Chapter 4). Plates: Gemini engravings, sheets g–k.
+// ======================= Chapter 5: a short history of five metals (plain English) =======================
+// Facts checked against the sources listed in sources.md (Chapter 5). Plates: Gemini engravings, sheets g–k.
 
 const CH4_LANES = [
   { name: 'Copper', tone: '#b4643c', ev: [[-8000, 'first tools'], [-3300, 'Bronze Age'], [1866, 'Atlantic cable']] },
@@ -10,11 +10,11 @@ const CH4_LANES = [
 ];
 
 const ch4a = flatSpread({
-  key: 'ch4-intro', title: 'Chapter 4: A short history of five metals',
+  key: 'ch4-intro', title: 'Chapter 5: A short history of five metals',
   left: [
-    { kicker: 'Chapter 4 · A short history of five metals' },
+    { kicker: 'Chapter 5 · A short history of five metals' },
     { h1: 'Ten thousand years in one page' },
-    { p: 'The first three chapters looked at the markets of today. This chapter steps back and tells the stories behind five metals: copper, gold, silver, platinum and palladium.' },
+    { p: 'The first four chapters looked at the markets of today. This chapter steps back and tells the stories behind five metals: copper, gold, silver, platinum and palladium.' },
     { p: 'The stories explain things that still matter. They show why gold and silver became money and copper did not, why central banks hold gold but not silver, and why platinum and palladium became metals for cars.' },
     { figs: ['h-oxhide', 'h-lion', 'h-owl'], h: 0.1, cap: 'A copper ingot, an early gold-and-silver coin, an Athenian silver coin.' },
   ],
@@ -26,7 +26,7 @@ const ch4a = flatSpread({
 });
 
 const ch4b = flatSpread({
-  key: 'ch4-copper-old', title: 'Chapter 4: Copper, the first metal',
+  key: 'ch4-copper-old', title: 'Chapter 5: Copper, the first metal',
   left: [
     { kicker: 'Copper' },
     { h1: 'The first metal' },
@@ -44,7 +44,7 @@ const ch4b = flatSpread({
 });
 
 const ch4c = flatSpread({
-  key: 'ch4-first-coins', title: 'Chapter 4: Gold and silver become money',
+  key: 'ch4-first-coins', title: 'Chapter 5: Gold and silver become money',
   left: [
     { kicker: 'Gold and silver' },
     { h1: 'The first coins' },
@@ -62,7 +62,7 @@ const ch4c = flatSpread({
 });
 
 const ch4d = flatSpread({
-  key: 'ch4-potosi', title: 'Chapter 4: The silver mountain',
+  key: 'ch4-potosi', title: 'Chapter 5: The silver mountain',
   left: [
     { h1: 'The silver mountain' },
     { p: 'In 1545 Spanish colonists found a mountain of silver in the Andes, in today’s Bolivia. They called it Cerro Rico, the “rich hill”, and built the town of Potosí at its foot. Within a few decades Potosí was one of the largest cities in the Americas.' },
@@ -78,7 +78,7 @@ const ch4d = flatSpread({
 });
 
 const ch4e = flatSpread({
-  key: 'ch4-gold-standard', title: 'Chapter 4: The gold standard and the gold rushes',
+  key: 'ch4-gold-standard', title: 'Chapter 5: The gold standard and the gold rushes',
   left: [
     { kicker: 'Gold' },
     { h1: 'Britain chooses gold' },
@@ -96,7 +96,7 @@ const ch4e = flatSpread({
 });
 
 const ch4f = flatSpread({
-  key: 'ch4-gold-20c', title: 'Chapter 4: Gold in the twentieth century',
+  key: 'ch4-gold-20c', title: 'Chapter 5: Gold in the twentieth century',
   left: [
     { h1: 'Gold in the twentieth century' },
     { p: 'In 1933, in the middle of the Great Depression, President Franklin Roosevelt ordered Americans to hand in most of their gold coins and bars to the Federal Reserve. In January 1934 the government raised the price of gold from $20.67 to $35 an ounce. Overnight the dollar was worth less gold.' },
@@ -114,7 +114,7 @@ const ch4f = flatSpread({
 });
 
 const ch4g = flatSpread({
-  key: 'ch4-silver-modern', title: 'Chapter 4: Silver loses its job as money',
+  key: 'ch4-silver-modern', title: 'Chapter 5: Silver loses its job as money',
   left: [
     { kicker: 'Silver' },
     { h1: 'Silver loses its job as money' },
@@ -132,7 +132,7 @@ const ch4g = flatSpread({
 });
 
 const ch4h = flatSpread({
-  key: 'ch4-copper-modern', title: 'Chapter 4: Copper wires the world',
+  key: 'ch4-copper-modern', title: 'Chapter 5: Copper wires the world',
   left: [
     { kicker: 'Copper' },
     { h1: 'Copper wires the world' },
@@ -150,7 +150,7 @@ const ch4h = flatSpread({
 });
 
 const ch4i = flatSpread({
-  key: 'ch4-platinum', title: 'Chapter 4: Platinum, the unwanted silver',
+  key: 'ch4-platinum', title: 'Chapter 5: Platinum, the unwanted silver',
   left: [
     { kicker: 'Platinum' },
     { h1: 'The unwanted “little silver”' },
@@ -168,7 +168,7 @@ const ch4i = flatSpread({
 });
 
 const ch4j = flatSpread({
-  key: 'ch4-palladium', title: 'Chapter 4: Palladium, the metal sold in a shop',
+  key: 'ch4-palladium', title: 'Chapter 5: Palladium, the metal sold in a shop',
   left: [
     { kicker: 'Palladium' },
     { h1: 'The metal sold in a shop' },
@@ -186,7 +186,7 @@ const ch4j = flatSpread({
 });
 
 const ch4k = flatSpread({
-  key: 'ch4-lessons', title: 'Chapter 4: What history keeps repeating',
+  key: 'ch4-lessons', title: 'Chapter 5: What history keeps repeating',
   left: [
     { h1: 'What history keeps repeating' },
     { h2: 'Exchanges change the rules' },
