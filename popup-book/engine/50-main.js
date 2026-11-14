@@ -222,16 +222,31 @@ function buildSpreads() {
     showSpread(i + 1, false);
   });
 }
+// page prints are kept only for spreads near the open one: a print is a few MB of canvas plus GPU textures,
+// and a long book printed in full runs out of memory on phones (pages then flash or go blank while turning)
+const ART_WIN = 2;
+function artFor(n) {
+  const i = n - 1;
+  const a = arts[i] || (arts[i] = new PageArt(SPREADS[i], view.k, !spreadState[i].cards.length));
+  if (!a.drawn) { a.draw(); a.homeBaked = false; for (const t of new Set([...a.restTex, ...a.foldTex])) renderer.initTexture(t); }
+  return a;
+}
+function keepNear(P) {
+  for (let n = 1; n <= N; n++) {
+    if (Math.abs(n - P) <= ART_WIN) artFor(n);
+    else if (arts[n - 1] && arts[n - 1].drawn) arts[n - 1].release();
+  }
+}
 function drawArts() {
   view.k = pageK();
-  SPREADS.forEach((sp, i) => { const a = arts[i] || (arts[i] = new PageArt(sp, view.k)); a.draw(); a.homeBaked = false; });
+  keepNear(S.P);
 }
 function showSpread(n, vis) {
   const ss = spreadState[n - 1]; if (!ss) return;
   for (const c of ss.cards) c.root.visible = vis;
   for (const o of ss.extras) o.visible = vis;
 }
-function bake(n) { const a = arts[n - 1]; if (!a) return; book.group.updateMatrixWorld(true); a.bakeFold(spreadState[n - 1].cards, book.group); }
+function bake(n) { const a = artFor(n); book.group.updateMatrixWorld(true); a.bakeFold(spreadState[n - 1].cards, book.group); }
 
 // ---------- state ----------
 const S = { P: 0, mode: 'rest', turn: null, rise: null, interacted: false };
@@ -240,18 +255,20 @@ function bookShift(P) { if (P < 1) return (PW / 2) * (1 - easeInOut(clamp(P))); 
 function setRestView(P) {
   book.group.position.x = MX * bookShift(P);
   book.blockL.visible = P <= N; book.blockR.visible = P >= 1;
-  if (P === 0) { book.setBase(-1, null); book.setBase(1, null); book.sheetVisible(true); book.setSheet(coverTex, arts[0].restTex[1]); book.curl(0, 0); }
-  else if (P === N + 1) { book.setBase(-1, null); book.setBase(1, null); book.sheetVisible(true); book.setSheet(arts[N - 1].restTex[0], backCoverTex); book.curl(1, 0); }
-  else { book.sheetVisible(false); book.setBase(-1, arts[P - 1].restTex[0]); book.setBase(1, arts[P - 1].restTex[1]); }
+  if (P === 0) { book.setBase(-1, null); book.setBase(1, null); book.sheetVisible(true); book.setSheet(coverTex, artFor(1).restTex[1]); book.curl(0, 0); }
+  else if (P === N + 1) { book.setBase(-1, null); book.setBase(1, null); book.sheetVisible(true); book.setSheet(artFor(N).restTex[0], backCoverTex); book.curl(1, 0); }
+  else { const a = artFor(P); book.sheetVisible(false); book.setBase(-1, a.restTex[0]); book.setBase(1, a.restTex[1]); }
 }
 function setTurnTextures(j) {
   // sheet j turns: front = left page of spread j (or the cover), back = right page of spread j+1 (or the back cover)
-  book.setSheet(j === 0 ? coverTex : arts[j - 1].foldTex[0], j === N ? backCoverTex : arts[j].foldTex[1]);
-  book.setBase(-1, j + 1 <= N ? arts[j].foldTex[0] : null);
-  book.setBase(1, j >= 1 ? arts[j - 1].foldTex[1] : null);
+  // pages that lie still use the rest print when it is the same picture (no sharpness jump when the turn starts and ends)
+  const A = j >= 1 ? artFor(j) : null, B = j + 1 <= N ? artFor(j + 1) : null;
+  book.setSheet(j === 0 ? coverTex : A.foldTex[0], j === N ? backCoverTex : B.foldTex[1]);
+  book.setBase(-1, B ? (B.flat ? B.restTex[0] : B.foldTex[0]) : null);
+  book.setBase(1, A ? (A.flat ? A.restTex[1] : A.foldTex[1]) : null);
   book.sheetVisible(true);
 }
-function ensureHomeBake(n) { const a = arts[n - 1]; if (a && !a.homeBaked) { bake(n); a.homeBaked = true; } }
+function ensureHomeBake(n) { const a = artFor(n); if (!a.homeBaked) { bake(n); a.homeBaked = true; } }
 
 function startTurn(dir, drag) {
   if (S.turn) return false;
@@ -310,9 +327,10 @@ function release(T, velT) {
 function finishTurn(end) {
   const T = S.turn, P = T.j + end;
   S.turn = null; S.P = P;
-  if (T.from !== P && isOpen(T.from)) { const m = spreadState[T.from - 1].mech; m.reset && m.reset(); arts[T.from - 1].homeBaked = false; }
+  if (T.from !== P && isOpen(T.from)) { const m = spreadState[T.from - 1].mech; m.reset && m.reset(); if (arts[T.from - 1]) arts[T.from - 1].homeBaked = false; }
   setRestView(P);
   applyLight(P);
+  setTimeout(() => { if (!S.turn) keepNear(S.P); }, 150);   // print the next spreads after the page has landed
   if (isOpen(P)) startRise(P);
   else S.mode = 'rest';
   updateHud();
@@ -493,6 +511,7 @@ function maybeReprint() {
   reprintTimer = setTimeout(() => {
     if (S.turn) { maybeReprint(); return; }
     if (Math.abs(pageK() - view.k) < 2) return;
+    for (const a of arts) if (a && a.drawn) a.release();
     arts.length = 0; drawArts(); setRestView(S.P); renderer.shadowMap.needsUpdate = true;
   }, 400);
 }
@@ -538,16 +557,14 @@ async function start() {
   planIds.forEach((id, i) => (PLAN_IMG[id] = plans[i]));
   await prepareEquations(texts.filter((t) => t.eq).concat(SPREADS.flatMap((s) => s.eqs || [])));   // eqs: equations a spread prints itself in plan()
   coverTex = coverCanvas(cover, true); backCoverTex = coverCanvas(cover, false);
-  drawArts();
   buildSpreads();
+  drawArts();
   await Promise.all(spreadState.flatMap((ss) => ss.cards.map((c) => c.ready)));
   setRestView(S.P); applyLight(S.P);
   if (TEST && TEST.P !== undefined) jump(TEST.P);
   updateCamera(0);
   renderer.shadowMap.needsUpdate = true;
   updateHud();
-  // upload page textures before the first turn
-  for (const a of arts) for (const t of [...a.restTex, ...a.foldTex]) renderer.initTexture(t);
   loader.classList.add('done'); if (TEST) loader.style.display = 'none';
   window.__ready = true;
   if (!TEST) renderer.setAnimationLoop(() => frame());
@@ -556,6 +573,7 @@ async function start() {
 function jump(P) {
   if (isOpen(S.P)) showSpread(S.P, false);
   S.turn = null; S.rise = null; S.P = P; S.mode = 'rest';
+  keepNear(P);
   setRestView(P); applyLight(P);
   if (isOpen(P)) { showSpread(P, true); spreadState[P - 1].cards.forEach((c) => c.setRise(c.held ? 0 : 1)); }
   renderer.shadowMap.needsUpdate = true; updateHud();
@@ -566,7 +584,7 @@ updateOrient();
 // test hooks
 window.__app = {
   jump, frame: (dt = 0.016, n = 1) => { for (let i = 0; i < n; i++) frame(dt, i < n - 1); renderer.shadowMap.needsUpdate = true; frame(0); },
-  info: () => ({ P: S.P, mode: S.mode, k: view.k, dpr: renderer.getPixelRatio(), calls: renderer.info.render.calls, tris: renderer.info.render.triangles }),
+  info: () => ({ drawn: arts.filter((a) => a && a.drawn).length, P: S.P, mode: S.mode, k: view.k, dpr: renderer.getPixelRatio(), calls: renderer.info.render.calls, tris: renderer.info.render.triangles }),
   turnAt(dir, t, beta = 0) { // freeze a mid-turn frame
     startTurn(dir, { x0: 0, y0: 0 }); const T = S.turn; T.beta = beta;
     for (let i = 0; i < 30 && T.phase === 'fold'; i++) stepTurn(0.02);
@@ -579,7 +597,7 @@ window.__app = {
   // layout audit of spread n at rest: cards that leave the page, and printed text or labels a card covers
   audit(n) {
     jump(n); frame(0); book.group.updateMatrixWorld(true);
-    const out = [], art = arts[n - 1], v = V3(), px = book.group.position.x;
+    const out = [], art = artFor(n), v = V3(), px = book.group.position.x;
     const toPage = (p) => { v.copy(p).project(camera); return [v.x * view.hw + view.ox - px, v.y * view.hh + view.oy]; };
     for (const c of spreadState[n - 1].cards) {
       if (!c.root.visible || c.held || c.root.scale.x < 0.01) continue;

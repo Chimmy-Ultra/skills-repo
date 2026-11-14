@@ -98,17 +98,26 @@ function planCtx(g, k) {
 }
 
 class PageArt {
-  constructor(spread, k) {
-    this.spread = spread; this.k = k;
+  // flat: the spread has no cards, so the folded print is the rest print (shared canvases, no baking)
+  constructor(spread, k, flat = false) {
+    this.spread = spread; this.k = k; this.flat = flat;
     const w = Math.round(PW * k), h = Math.round(k);
     this.w = w; this.h = h;
     this.rest = [makeCanvas(w, h), makeCanvas(w, h)];
-    this.fold = [makeCanvas(w, h), makeCanvas(w, h)];
+    this.fold = flat ? this.rest : [makeCanvas(w, h), makeCanvas(w, h)];
     this.restTex = this.rest.map((c) => texFromCanvas(c, { mip: false }));   // shown 1:1 at rest: no mip blending
     this.foldTex = this.fold.map((c) => texFromCanvas(c));
     this.foldKey = '';
+    this.drawn = false;
+  }
+  // free the canvases and GPU textures of a spread far from the open one (long books run out of memory on phones)
+  release() {
+    for (const c of new Set([...this.rest, ...this.fold])) { c.width = 1; c.height = 1; }
+    for (const t of [...this.restTex, ...this.foldTex]) t.dispose();
+    this.drawn = false;
   }
   draw() {
+    for (const c of new Set([...this.rest, ...this.fold])) if (c.width !== this.w || c.height !== this.h) { c.width = this.w; c.height = this.h; }
     const k = this.k, W = this.w * 2, H = this.h;
     const c = makeCanvas(W, H), g = c.getContext('2d');
     // paper
@@ -147,11 +156,14 @@ class PageArt {
       if (LEFT) { pg.setTransform(-1, 0, 0, 1, this.w, 0); pg.drawImage(c, -(1 - s) * this.w, 0); pg.setTransform(1, 0, 0, 1, 0, 0); }
       else pg.drawImage(c, -s * this.w, 0);
       this.restTex[s].needsUpdate = true;
+      if (this.flat) this.foldTex[s].needsUpdate = true;
     }
     this.foldKey = '';
+    this.drawn = true;
   }
   // print the folded pieces (art face-up) onto the fold canvases, far pieces first
   bakeFold(cards, bookGroup) {
+    if (this.flat) return;
     const k = this.k, H = this.h, wp = V3();
     const items = cards.filter((c) => !c.def.noBake && c.root.scale.x > 0.01 && c.mat.map && c.mat.map.image).map((c) => { c.root.getWorldPosition(wp); return { c, y: wp.y, A: c.foldedAffine(bookGroup) }; });
     items.sort((a, b) => b.y - a.y);
