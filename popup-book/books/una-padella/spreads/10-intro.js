@@ -10,6 +10,6 @@ const intro = flatSpread({
   ],
   right: [
     { h2: '目錄' },
-    { table: { cols: [0.22, 0.78], head: ['', '食譜'], align: ['l', 'l'], rows: [['一', '濃湯牛肉義大利麵']] } },
+    { table: { cols: [0.22, 0.78], head: ['', '食譜'], align: ['l', 'l'], rows: [['一', '濃湯牛肉義大利麵'], ['二', '醬油奶油炒烏龍']] } },
   ],
 });

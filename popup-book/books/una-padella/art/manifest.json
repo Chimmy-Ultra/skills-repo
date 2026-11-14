@@ -1,4 +1,1 @@
-{"src": ["../art-src"], "stock": "#f2ead8", "items": [
- {"sheet": ["f-cooktop", "f-pan", "f-pasta", "f-packet", "f-butter", "f-beef"], "from": "sheet-a", "cap": 900, "sprite": true},
- {"sheet": ["p-ends", "p-pressed", "p-pour", "p-sauce", "p-beef", "p-wipe"], "from": "sheet-b", "cap": 900, "sprite": true},
- {"flat": "cover", "from": "cover"}]}
+{"src": ["../art-src"], "stock": "#f2ead8", "items": [{"sheet": ["f-cooktop", "f-pan", "f-pasta", "f-packet", "f-butter", "f-beef"], "from": "sheet-a", "cap": 900, "sprite": true}, {"sheet": ["p-ends", "p-pressed", "p-pour", "p-sauce", "p-beef", "p-wipe"], "from": "sheet-b", "cap": 900, "sprite": true}, {"sheet": ["u-udon", "u-pork", "u-cabbage", "u-soy", "u-bonito"], "from": "sheet-c", "cap": 900, "sprite": true}, {"sheet": ["u-s1", "u-s2", "u-s3", "u-s4", "u-s5"], "from": "sheet-d", "cap": 900, "sprite": true}, {"flat": "cover", "from": "cover"}]}
