@@ -85,6 +85,7 @@ function planCtx(g, k) {
     const im = PLAN_IMG[id]; if (!im) return;
     const [sx, sy, sw, sh] = box || [0, 0, im.width, im.height], h = (w * sh) / sw, [X, Y] = T(x, y);
     g.drawImage(im, sx, sy, sw, sh, X, Y, L(w), L(h));
+    if (window.__imgN !== undefined) window.__imgN++;   // #debug read-out: plates actually printed
   };
   const rnd = mulberry32(7);
   // text(b): print a block; a block with y: null flows below the previous block (gap: b.space)

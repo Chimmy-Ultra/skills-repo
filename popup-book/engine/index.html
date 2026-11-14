@@ -17,6 +17,8 @@ html, body { height: 100%; margin: 0; }
 [hidden] { display: none !important; }
 body { background: var(--bg); color: var(--ink); font-family: var(--f-brush); overflow: hidden; -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
 #stage { position: fixed; inset: 0; touch-action: none; }
+/* a mouse drag must not start a text selection: Chrome tints a selected canvas blue, which flashes over the page */
+html, body, #stage, #stage canvas { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 #stage canvas { display: block; outline: none; -webkit-tap-highlight-color: transparent; }
 .hud { position: fixed; left: 0; right: 0; bottom: 0; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 6px;
   padding: 0 max(16px, env(safe-area-inset-right, 0px)) max(8px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }

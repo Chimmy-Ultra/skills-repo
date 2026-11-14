@@ -30,6 +30,7 @@ def open_book(p, book, P=0):
                 return r.fulfill(status=200, body=open(f, 'rb').read(), headers={'content-type': 'application/javascript'})
         if u.startswith('https://local.test/a/'):
             f = os.path.join(dist, 'a', u.split('/a/')[1])
+            if os.environ.get('SLOW'): time.sleep(float(os.environ['SLOW']) / 1000)   # slow network: shows load-order races
             if os.path.exists(f): return r.fulfill(status=200, body=open(f, 'rb').read(), headers={'content-type': 'image/webp'})
             print('MISSING', u); return r.fulfill(status=404, body='')
         if u.startswith('https://local.test/'):

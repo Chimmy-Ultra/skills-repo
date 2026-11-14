@@ -161,6 +161,7 @@ function say(text, lang = BOOK.lang || 'en-US', rate = 0.9) {
 
 // ---------- build ----------
 const arts = [];            // arts[i] for spread i+1
+if (location.hash === '#debug') window.__imgN = 0;
 let coverTex, backCoverTex;
 function loadImage(src) { return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
 // covers: the cover image with the title. BOOK.cover: {image, style: 'slip' (a vertical title slip, right-bound books) |
@@ -239,6 +240,7 @@ function keepNear(P) {
 }
 function drawArts() {
   view.k = pageK();
+  for (const a of arts) if (a) a.drawn = false;   // a full print: everything kept is printed again at the new scale
   keepNear(S.P);
 }
 function showSpread(n, vis) {
@@ -277,8 +279,10 @@ function startTurn(dir, drag) {
   if (dir < 0 && k < 1) return false;
   const j = dir > 0 ? k : k - 1;
   const t0 = dir > 0 ? 0 : 1;
-  S.turn = { j, dir, t: t0, tv: t0, v: 0, t0, target: null, drag, phase: isOpen(k) ? 'fold' : 'curl', fold: 0, beta: 0, from: k };
+  const folds = isOpen(k) && spreadState[k - 1].cards.some((c) => c.rise > 0.01);   // a flat spread has nothing to fold down first
+  S.turn = { j, dir, t: t0, tv: t0, v: 0, t0, target: null, drag, phase: folds ? 'fold' : 'curl', fold: 0, beta: 0, from: k };
   S.rise = null; S.mode = 'turn';
+  if (!folds && isOpen(k)) spreadState[k - 1].mech.leave && spreadState[k - 1].mech.leave();
   if (S.turn.phase === 'fold') { const ss = spreadState[k - 1]; ss.cards.forEach((c) => (c.foldFrom = c.rise)); ss.extras.forEach((o) => (o.visible = false)); ss.mech.leave && ss.mech.leave(); }
   else beginCurl();
   sfx('page', 0.8);
@@ -393,6 +397,7 @@ function pick(ev) {
 }
 const ptr = { id: null };
 renderer.domElement.addEventListener('pointerdown', (ev) => {
+  if (ev.pointerType === 'mouse') ev.preventDefault();   // no text selection or native drag from a mouse drag
   ensureAudio();
   if (ptr.id !== null) return;
   const [x, y] = toReader(ev);
@@ -444,6 +449,7 @@ function endPointer(ev, cancel) {
   ptr.id = null;
 }
 renderer.domElement.addEventListener('pointerup', (ev) => endPointer(ev, false));
+for (const t of ['selectstart', 'dragstart']) renderer.domElement.addEventListener(t, (ev) => ev.preventDefault());
 renderer.domElement.addEventListener('pointercancel', (ev) => endPointer(ev, true));
 addEventListener('keydown', (ev) => {
   const fwd = LEFT ? 'ArrowRight' : 'ArrowLeft', back = LEFT ? 'ArrowLeft' : 'ArrowRight';
@@ -463,8 +469,9 @@ function updateHud() {
     else if (S.P === N + 1) h = UI.reopen;
     else { const m = spreadState[S.P - 1].mech; h = m.home && SPREADS[S.P - 1].hint ? SPREADS[S.P - 1].hint : (S.P < N ? UI.next : UI.close); }
   }
-  if (h !== hintEl.textContent || !h) { hintEl.textContent = h; hintShown = now; }
-  hintEl.classList.toggle('gone', !h);
+  // a new hint shows for 7 s; the same hint that already timed out stays hidden (no blink after every turn)
+  if (h && h !== hintEl.textContent) { hintEl.textContent = h; hintShown = now; }
+  hintEl.classList.toggle('gone', !h || now - hintShown > 7);
   srEl.textContent = S.P === 0 ? `${UI.cover}：${BOOK.title}` : S.P === N + 1 ? UI.back : SPREADS[S.P - 1].sr || SPREADS[S.P - 1].title;
 }
 // fullscreen: works where the page's frame allows it (Chrome, desktop browsers); otherwise say how to get it
@@ -509,6 +516,7 @@ let reprintTimer = 0;
 function maybeReprint() {
   clearTimeout(reprintTimer);
   reprintTimer = setTimeout(() => {
+    if (!window.__ready) return;   // still loading: start() prints the pages once fonts, plates and equations are in
     if (S.turn) { maybeReprint(); return; }
     if (Math.abs(pageK() - view.k) < 2) return;
     for (const a of arts) if (a && a.drawn) a.release();
@@ -567,8 +575,19 @@ async function start() {
   updateHud();
   loader.classList.add('done'); if (TEST) loader.style.display = 'none';
   window.__ready = true;
+  if (location.hash === '#debug') debugPanel();
   if (!TEST) renderer.setAnimationLoop(() => frame());
   else frame(0.016);
+}
+// #debug: a short read-out of what the page loaded and printed (for checking a published book on a real device)
+function debugPanel() {
+  const ids = Object.keys(PLAN_IMG);
+  const broken = ids.filter((id) => !PLAN_IMG[id].complete || !PLAN_IMG[id].naturalWidth);
+  const el = document.createElement('pre');
+  el.style.cssText = 'position:fixed;left:8px;top:8px;z-index:9;background:#fff;color:#000;font:12px monospace;padding:6px;max-width:90vw;white-space:pre-wrap';
+  el.textContent = `k ${view.k}  dpr ${devicePixelRatio}  plates ${ids.length} (not loaded: ${broken.join(', ') || 'none'})\n` +
+    `pages printed ${arts.filter((a) => a && a.drawn).length}  plates drawn ${window.__imgN}`;
+  document.body.appendChild(el);
 }
 function jump(P) {
   if (isOpen(S.P)) showSpread(S.P, false);
