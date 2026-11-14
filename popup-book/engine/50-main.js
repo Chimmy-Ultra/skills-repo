@@ -477,7 +477,7 @@ STOPS.forEach((name, i) => { const b = document.createElement('button'); b.type 
 function updateHud() {
   [...dotsEl.children].forEach((b, i) => { b.classList.toggle('on', i === S.P); b.setAttribute('aria-current', i === S.P ? 'step' : 'false'); });
   let h = '';
-  if (!S.turn) {
+  if (!S.turn && BOOK.hints !== false) {   // book.json hints:false hides the turn-the-page hints
     if (S.P === 0) h = UI.open;
     else if (S.P === N + 1) h = UI.reopen;
     else { const m = spreadState[S.P - 1].mech; h = m.home && SPREADS[S.P - 1].hint ? SPREADS[S.P - 1].hint : (S.P < N ? UI.next : UI.close); }

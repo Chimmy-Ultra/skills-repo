@@ -7,5 +7,15 @@
   "aria": "Una Padella：一個平底鍋煮到底的宿舍義大利麵。可以用手指翻頁的書。",
   "loader": "燒水中",
   "paper": "#efe8d8",
-  "cover": {"image": "cover", "style": "open", "y": 0.14, "rule": ["#2e6b3a", "#cfc6b4", "#a8322d"]}
+  "cover": {
+    "image": "cover",
+    "style": "open",
+    "y": 0.14,
+    "rule": [
+      "#2e6b3a",
+      "#cfc6b4",
+      "#a8322d"
+    ]
+  },
+  "hints": false
 }
