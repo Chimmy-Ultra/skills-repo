@@ -62,19 +62,19 @@ const ch1l = flatSpread({
   key: 'ch1-summary', title: 'Chapter 1: The three side by side',
   left: [
     { h1: 'The three side by side' },
-    { table: { cols: [0.25, 0.25, 0.25, 0.25], size: 0.0178, head: ['', 'Gold', 'Silver', 'Palladium'], align: ['l', 'l', 'l', 'l'], rows: [
-      ['Main buyers', 'jewellery, investors, central banks', 'industry 58%, investors, jewellery', 'car catalysts, about 81%'],
-      ['Central banks', 'yes, 863–1,092 t a year, 2023–25', 'no', 'no'],
-      ['Supply', 'mines plus recycling; slow to respond', 'mostly a by-product of lead, zinc, copper, gold', 'Russia and South Africa; by-product'],
-      ['Main price drivers', 'real rate, dollar, central banks', 'real rate, dollar, plus copper, solar, risk appetite', 'car output, Russian supply, platinum gap'],
-      ['In a crisis', 'usually holds up', 'falls with industrial commodities', 'follows the car industry']] } },
+    { table: { cols: [0.22, 0.26, 0.26, 0.26], size: 0.0208, pad: 0.009, head: ['', 'Gold', 'Silver', 'Palladium'], align: ['l', 'l', 'l', 'l'], rows: [
+      ['Main buyers', 'jewellery, investors, central banks', 'industry (58%), investors, jewellery', 'car catalysts (81%)'],
+      ['Central banks', 'over 860 t every year since 2022', 'none', 'none'],
+      ['Supply', 'mines and recycling; slow to respond', 'mostly a by-product of lead, zinc, copper and gold', 'Russia and South Africa; a by-product'],
+      ['Price drivers', 'real rate, dollar, central banks', 'real rate and dollar, plus copper, solar, risk appetite', 'car output, Russian supply, platinum price'],
+      ['In a crisis', 'usually holds up', 'falls with industrial metals', 'follows the car industry']] } },
+    { figs: ['bar-gold', 'bar-silver', 'bar-pd'], h: 0.05 },
   ],
   right: [
     { h2: 'What to take from this chapter' },
     { p: 'Gold is close to a pure monetary asset. Its new supply is small next to its stock, its industrial use is minor, and central banks buy it regardless of price. Its main variables are the real interest rate and the dollar.' },
     { p: 'Silver is a hybrid. Its monetary half follows gold, its industrial half follows the business cycle, and its small market enlarges both. In a crisis the industrial half usually wins.' },
     { p: 'Palladium is precious by definition but industrial by behaviour. Its price depends mostly on car production, the shift to electric cars, Russian supply and its price gap with platinum.' },
-    { figs: ['bar-gold', 'bar-silver', 'bar-pd'], h: 0.05 },
     { note: 'Sources for this chapter: World Gold Council (Gold Demand Trends FY2025 and Q3 2026; Central Bank Gold Reserves Survey 2026; Gold Market Primer), Silver Institute / Metals Focus (World Silver Survey 2026), Johnson Matthey (PGM Market Report 2026), SFA (Oxford) for the International Platinum Group Metals Association (2026), WPIC, USGS Mineral Commodity Summaries 2026, Bank of England, LBMA, CME Group, StoneX, Goldman Sachs via news reports, Reuters, Yahoo Finance price data.' },
   ],
 });

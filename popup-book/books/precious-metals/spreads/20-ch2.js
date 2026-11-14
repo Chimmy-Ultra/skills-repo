@@ -17,7 +17,7 @@ function ch2Chart(c, x, y, w) {
   c.line(CH2_PTS.map(([d, v]) => [X(d), Y(v)]), TONE.silver, 0.003);
   c.line(CH2_PTS.map(([d, v]) => [X(d), Y(v)]), 'rgba(60,66,72,0.9)', 0.0012);
   [['Dec', 17], ['Feb', 79], ['Apr', 138], ['Jun', 199], ['Aug', 260], ['Oct', 321]].forEach(([l, d]) => c.text({ x: X(d), y: Y(ymin) - 0.005, w: 0.08, size, lh: 1.2, align: 'center', paras: [l], color: '#4a3d30' }));
-  c.text({ x: X(150), y: Y(-22) + size, w: 0.3, size, lh: 1.2, paras: ['dashed lines: ±2σ(ε)√T, the range of pure noise'], color: TONE.blue });
+  c.text({ x: X(150), y: Y(-22) + size, w: 0.3, size, lh: 1.2, paras: ['dashed lines: two standard deviations of pure noise'], color: TONE.blue });
   return y - base + size * 1.6;
 }
 
@@ -58,11 +58,12 @@ const ch2b = flatSpread({
   right: [
     { h2: 'Why one day says little' },
     { p: 'On 13 November 2026 gold fell 0.13% and silver fell 2.28%. With the calm-window β of 1.2, gold explains a silver move of 1.2 × (−0.13%) ≈ −0.16%, so the residual that day was about −2.1%.' },
-    { p: 'The size of a typical residual is its standard deviation σ(ε). Over the past year, with β = 1.2, σ(ε) comes to about 2.7% a day. A residual of −2.1% is smaller than one standard deviation, and residuals at least that large occur on more than four days in ten. A single day’s residual is therefore almost always noise, and it does not justify a story.' },
+    { p: 'The typical size of a residual is its standard deviation σ(ε), about 2.7% a day over the past year. Residuals of 2.1% or more occur on more than four days in ten, so a single day’s residual is almost always noise and does not justify a story.' },
     { h2: 'Add the residuals up' },
     { p: 'Information shows up when residuals keep pointing the same way. The [[cumulative residual]] adds them day by day:' },
-    { eq: 'E_T = \\sum_{t=1}^{T} \\varepsilon_t' },
-    { p: 'If the residuals were pure noise, E(T) would wander around zero, and its spread would grow only in proportion to σ(ε)\u221aT, the residual\u2019s daily standard deviation times the square root of the number of days.' },
+    { eq: 'E(T) = \\sum_{t=1}^{T} \\varepsilon_t', size: 0.026 },
+    { p: 'If the residuals were pure noise, E(T) would wander around zero, and its spread would grow only with the square root of the number of days:' },
+    { eq: '\\mathrm{SD}\\big(E(T)\\big) = \\sigma(\\varepsilon) \\sqrt{T}', size: 0.026 },
   ],
 });
 
@@ -72,7 +73,7 @@ const ch2c = flatSpread({
     { h2: 'A year of silver against gold' },
     { chart: ch2Chart },
     { p: 'The chart uses β = 1.20 from the earlier window and adds up silver’s residuals from 14 November 2025. Between mid-November and 23 January the sum climbed to about +50%. Over those ten weeks (48 trading days) noise alone would give a spread of only' },
-    { eq: '\\sigma_\\varepsilon \\sqrt{T} \\approx 2.7\\% \\times \\sqrt{48} \\approx 19\\%', size: 0.024 },
+    { eq: '\\sigma(\\varepsilon) \\sqrt{T} \\approx 2.7\\% \\times \\sqrt{48} \\approx 19\\%', size: 0.024 },
     { p: 'so +50% is about 2.6 times that and well outside the dashed band. Silver rose far more than gold explains: this was the run-up that followed the October 2025 London squeeze, driven by buying aimed at silver itself. On 30 January a single day took away about 18 points.' },
   ],
   right: [

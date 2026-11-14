@@ -66,21 +66,37 @@ function fitFlow(c, x, items, w, y0) {
 
 // a ruled table; cols: column widths as fractions of w; align: 'l' | 'r' per column
 function table(c, x, y, w, t) {
-  const size = t.size || 0.0205, pad = 0.006, rule = 'rgba(42,33,25,0.75)';
+  const size = t.size || 0.0205, pad = t.pad || 0.0065, rule = 'rgba(42,33,25,0.75)', hair = 'rgba(42,33,25,0.18)';
+  const stub = t.stub !== false && t.head[0] === '';   // a first column of row labels
   const xs = []; let acc = 0; t.cols.forEach((f) => { xs.push(x + acc * w); acc += f; });
-  const row = (cells, head) => {
-    let low = y;
-    cells.forEach((txt, i) => {
-      const cw = t.cols[i] * w - pad * 2, right = (t.align || [])[i] === 'r';
-      const r = c.text({ x: right ? xs[i] + t.cols[i] * w - pad : xs[i] + pad, y: y - pad, w: cw, size, lh: 1.35, align: right ? 'right' : 'left', paras: [String(txt)], color: INK, italic: !!head });
-      if (r) low = Math.min(low, r.y0);
-    });
-    y = low - pad;
+  const box = (y0, y1, fill) => c.fill([[x, y0], [x + w, y0], [x + w, y1], [x, y1]], fill);
+  // measure a row on a clipped dry run, then paint its background and print it
+  const row = (cells, kind, band) => {
+    const print = () => {
+      let low = y;
+      cells.forEach((txt, i) => {
+        const cw = t.cols[i] * w - pad * 2, right = (t.align || [])[i] === 'r';
+        const label = kind === 'head' || (stub && i === 0);
+        const r = c.text({ x: right ? xs[i] + t.cols[i] * w - pad : xs[i] + pad, y: y - pad, w: cw, size: kind === 'head' ? size * 1.02 : size, lh: 1.32,
+          align: right ? 'right' : 'left', paras: [String(txt)], color: label ? '#2a2119' : '#3a2f25', weight: label ? 600 : 400 });
+        if (r) low = Math.min(low, r.y0);
+      });
+      return low - pad;
+    };
+    c.g.save(); c.g.beginPath(); c.g.rect(0, 0, 0, 0); c.g.clip();
+    const n0 = c.rects.length, low = print(); c.rects.length = n0;
+    c.g.restore();
+    if (kind === 'head') box(y, low, 'rgba(120,92,52,0.13)');
+    else if (band) box(y, low, 'rgba(120,92,52,0.05)');
+    y = print();
   };
   c.line([[x, y], [x + w, y]], rule, 0.0018);
-  row(t.head, true);
-  c.line([[x, y], [x + w, y]], rule, 0.0009);
-  t.rows.forEach((r) => row(r, false));
+  row(t.head, 'head');
+  c.line([[x, y], [x + w, y]], rule, 0.0011);
+  t.rows.forEach((r, k) => {
+    if (k) c.line([[x, y], [x + w, y]], hair, 0.0008);
+    row(r, 'body', k % 2 === 1);
+  });
   c.line([[x, y], [x + w, y]], rule, 0.0018);
   return y;
 }
