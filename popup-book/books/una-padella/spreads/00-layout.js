@@ -6,7 +6,7 @@
 //   { chart: (c, x, yTop, w) => height }               { note }  small grey text      { gap }
 const PG = { L: -0.6, R: 0.072, W: 0.53, TOP: 0.448 };
 const TXT = { body: 0.0245, lh: 1.6, h1: 0.04, h2: 0.0275, note: 0.0185 };
-const ART_READY = ['f-cooktop', 'f-pan', 'f-pasta', 'f-packet', 'f-butter', 'f-beef', 'p-ends', 'p-pressed', 'p-pour', 'p-sauce', 'p-beef', 'p-wipe', 'u-udon', 'u-pork', 'u-cabbage', 'u-soy', 'u-bonito', 'u-s1', 'u-s2', 'u-s3', 'u-s4', 'u-s5', 'z-block', 'z-packet', 'z-egg', 'z-boil', 'z-pour', 'z-done'];
+const ART_READY = ['f-cooktop', 'f-pan', 'f-pasta', 'f-packet', 'f-butter', 'f-beef', 'p-ends', 'p-pressed', 'p-pour', 'p-sauce', 'p-beef', 'p-wipe', 'u-udon', 'u-pork', 'u-cabbage', 'u-soy', 'u-bonito', 'u-s1', 'u-s2', 'u-s3', 'u-s4', 'u-s5', 'z-block', 'z-packet', 'z-egg', 'z-boil', 'z-pour', 'z-done', 'y-noodles', 'y-jar', 'y-boil', 'y-pour', 'y-done'];
 const TONE = { gold: '#b88c3a', silver: '#98a2ab', pd: '#7f858c', blue: '#2d5f73', grey: '#b9b2a4', red: '#9b3b2a' };
 const fmtN = (v, d = 0) => v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
 
