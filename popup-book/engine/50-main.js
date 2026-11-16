@@ -13,6 +13,7 @@ const UI = Object.assign({
   next: LEFT ? '把右頁往左拖，翻到下一頁' : '把左頁往右拖，翻到下一頁',
   close: LEFT ? '把右頁往左拖，闔上書' : '把左頁往右拖，闔上書',
   full: '全螢幕', unfull: '離開全螢幕', soundOn: '聲音開', soundOff: '聲音關',
+  page: '頁', pageGo: '輸入頁碼，按 Enter 跳過去',
   noFull: '這個畫面不讓網頁全螢幕。請用 Chrome 開這本書的連結，再按一次全螢幕。', failed: '載入失敗：',
 }, BOOK.ui || {});
 
@@ -465,6 +466,7 @@ renderer.domElement.addEventListener('pointerup', (ev) => endPointer(ev, false))
 for (const t of ['selectstart', 'dragstart']) renderer.domElement.addEventListener(t, (ev) => ev.preventDefault());
 renderer.domElement.addEventListener('pointercancel', (ev) => endPointer(ev, true));
 addEventListener('keydown', (ev) => {
+  if (ev.target && ev.target.tagName === 'INPUT') return;   // typing in the page box does not turn pages
   const fwd = LEFT ? 'ArrowRight' : 'ArrowLeft', back = LEFT ? 'ArrowLeft' : 'ArrowRight';
   if (ev.key === fwd || ev.key === ' ' || ev.key === 'PageDown') { ev.preventDefault(); ensureAudio(); goNext(); }
   if (ev.key === back || ev.key === 'PageUp') { ev.preventDefault(); ensureAudio(); goPrev(); }
@@ -474,7 +476,30 @@ addEventListener('keydown', (ev) => {
 // ---------- HUD ----------
 const STOPS = [UI.cover, ...SPREADS.map((s) => s.title), UI.back];
 STOPS.forEach((name, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', name); b.title = name; b.addEventListener('click', () => { ensureAudio(); goTo(i); }); dotsEl.appendChild(b); });
+// page box (book.json "pageJump": true): shows the left page number of the open spread; type a page and press Enter to go there.
+// Spread k holds pages 2k-1 and 2k, the same numbers the spreads print.
+let pageInp = null;
+if (BOOK.pageJump) {
+  const box = document.createElement('form'); box.className = 'pagebox'; box.setAttribute('role', 'search');
+  box.innerHTML = `<input type="text" inputmode="numeric" enterkeyhint="go" autocomplete="off" aria-label="${UI.page}: ${UI.pageGo}" title="${UI.pageGo}"><span class="of">/ ${2 * N}</span>`;
+  const tools = document.querySelector('.tools'); tools.insertBefore(box, tools.firstChild);   // sits with the screen buttons, above the right page's reserved band
+  pageInp = box.querySelector('input');
+  pageInp.addEventListener('focus', () => pageInp.select());
+  pageInp.addEventListener('blur', () => setTimeout(showPageNo, 0));
+  box.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const n = parseInt(pageInp.value.replace(/\D/g, ''), 10);
+    if (n >= 1 && n <= 2 * N) { ensureAudio(); queued = null; jump(Math.ceil(n / 2)); sfx('page', 0.8); }
+    pageInp.blur(); showPageNo();
+  });
+}
+function showPageNo() {
+  if (!pageInp || document.activeElement === pageInp) return;
+  pageInp.value = isOpen(S.P) ? String(2 * S.P - 1) : '';
+  pageInp.placeholder = S.P === 0 ? '1' : S.P === N + 1 ? String(2 * N) : '';
+}
 function updateHud() {
+  showPageNo();
   [...dotsEl.children].forEach((b, i) => { b.classList.toggle('on', i === S.P); b.setAttribute('aria-current', i === S.P ? 'step' : 'false'); });
   let h = '';
   if (!S.turn && BOOK.hints !== false) {   // book.json hints:false hides the turn-the-page hints

@@ -137,6 +137,13 @@ function vbars(rows, { max, h = 0.2, ticks = [], fmt = (v) => fmtN(v), ref = nul
 function platesOf(images, items) { return [...new Set(images.concat(items.flatMap((it) => it.figs || (it.fig ? [it.fig] : []))))]; }
 
 // one flat spread from two item lists
+// page numbers at the outer bottom corners, below the text and inside the frame
+function pageNo(c, a, b) {
+  const y = -0.42, size = 0.0168, color = '#6f5e4b';
+  c.text({ x: PG.L, y, w: 0.15, size, lh: 1.2, paras: [String(a)], color });
+  c.text({ x: PG.R + PG.W, y, w: 0.15, size, lh: 1.2, align: 'right', paras: [String(b)], color });
+}
+
 function flatSpread({ key, title, left, right, images = [] }) {
   const all = left.concat(right);
   const words = all.map((it) => it.h1 || it.h2 || it.p || it.note || it.cap || '').filter(Boolean).join(' ');

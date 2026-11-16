@@ -5,3 +5,9 @@ const SPREADS = [ch1a, ch1b, ch1c, ch1d, ch1e, ch1f, ch1g, ch1h, ch1i, ch1j, ch1
   ch5r_a, ch5r_b, ch5r_c, ch5r_d, ch5r_e, ch5r_f, ch5r_g, ch5r_h, ch5r_i,
   ch2a, ch2b, ch2c, ch3a, ch3b, ch3c, ch3d, ch3e, ch3f, ch3g,
   ch4a, ch4b, ch4c, ch4d, ch4e, ch4f, ch4g, ch4h, ch4i, ch4j, ch4k];
+
+// spread k (counting from 1) holds pages 2k−1 and 2k; the HUD page box uses the same numbers (book.json pageJump)
+SPREADS.forEach((s, i) => {
+  const plan = s.plan;
+  s.plan = function (c) { plan.call(this, c); pageNo(c, 2 * i + 1, 2 * i + 2); };
+});

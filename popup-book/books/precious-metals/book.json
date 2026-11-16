@@ -6,14 +6,33 @@
   "aria": "Gold, Silver, Palladium: a primer on reading the precious metals markets. A book you turn with your finger.",
   "loader": "Loading",
   "paper": "#efe8d8",
-  "cover": {"image": "cover", "style": "open", "y": 0.13, "rule": ["#b88c3a", "#a9b2ba", "#6f757c"], "subtitle": "Reading the Precious Metals Markets"},
+  "cover": {
+    "image": "cover",
+    "style": "open",
+    "y": 0.13,
+    "rule": [
+      "#b88c3a",
+      "#a9b2ba",
+      "#6f757c"
+    ],
+    "subtitle": "Reading the Precious Metals Markets"
+  },
   "ui": {
-    "cover": "Cover", "back": "Back cover",
+    "cover": "Cover",
+    "back": "Back cover",
     "open": "Drag the cover to the left to open the book",
     "reopen": "Drag the back cover to the right to go back in",
     "next": "Drag the right page to the left to turn it",
     "close": "Drag the right page to the left to close the book",
-    "full": "Full screen", "unfull": "Exit full screen", "soundOn": "Sound on", "soundOff": "Sound off",
-    "noFull": "This view does not allow full screen. Open the link in Chrome and try again.", "failed": "Failed to load: "
-  }
+    "full": "Full screen",
+    "unfull": "Exit full screen",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off",
+    "noFull": "This view does not allow full screen. Open the link in Chrome and try again.",
+    "failed": "Failed to load: ",
+    "page": "Page",
+    "pageGo": "Type a page number and press Enter"
+  },
+  "pageJump": true,
+  "turnHint": "Turn your phone sideways for a bigger book"
 }

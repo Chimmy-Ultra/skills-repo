@@ -33,6 +33,13 @@ html, body, #stage, #stage canvas { -webkit-user-select: none; user-select: none
 .tool { font: inherit; font-size: 14px; letter-spacing: 0.1em;
   color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: 0.75; }
+.pagebox { margin: 0; display: inline-flex; align-items: center; gap: 4px;
+  font-size: 14px; letter-spacing: 0.1em; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: 0.75; }
+.pagebox:focus-within { opacity: 1; }
+.pagebox input { font: inherit; letter-spacing: 0.04em; width: 2.4em; text-align: right; color: inherit; background: transparent; border: 0; border-bottom: 1px solid var(--line); padding: 1px 0; outline: none; }
+.pagebox input:focus { border-bottom-color: var(--vermil); }
+.pagebox .of { color: var(--muted); }
 .tool svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; }
 #btnSound[aria-pressed="false"] { opacity: 0.45; }
 button:focus-visible { outline: 2px solid var(--vermil); outline-offset: 2px; }
@@ -42,6 +49,9 @@ button:focus-visible { outline: 2px solid var(--vermil); outline-offset: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .turn-hint { display: none; position: fixed; top: max(14px, env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%); margin: 0; font-size: 14px; letter-spacing: .14em; color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; white-space: nowrap; pointer-events: none; }
 body.portrait .turn-hint { display: block; }
+body.portrait:has(.pagebox) .turn-hint { top: calc(max(10px, env(safe-area-inset-top, 0px)) + 42px); }
+/* short landscape screens (phones): the screen buttons keep only their icons, so they stay off the page text */
+@media (max-height: 500px) { .tool span { display: none; } .tool { padding: 5px 9px; } }
 @media (prefers-reduced-motion: reduce) { .hint, #loader { transition: none; } }
 </style>
 <div id="stage" aria-label="%%ARIA%%"></div>
