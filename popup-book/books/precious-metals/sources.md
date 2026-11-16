@@ -1,4 +1,4 @@
-# Sources — Gold, Silver, Palladium (chapters 1–5)
+# Sources — Gold, Silver, Palladium (chapters 1–8)
 
 Checked 2026-11-14. "Computed" = calculated for this book from the data files in `data/`.
 
@@ -45,10 +45,40 @@ Checked November 2026. Plates: Gemini engravings, sheets l–r (anonymous figure
 - End use: WGC India gold market series (22-carat dominance); Business Standard (China 24-carat). CRU for the Silver Institute via pv magazine (2019): silver per cell 400 mg (2007) → 130 mg (2016).
 - Recycling: Chapter 1 (WGC 2025 recycling 1,404 t). Ecotrade Group (decanning, milling, sampling, smelting). IPA fact sheet: autocatalyst ceramic ≈ 2,000 g/t PGMs vs primary ore 2–6 g/t; up to 95% recovery. CME Group (2023): autocatalyst recycling lag ≈ 13 years.
 
-## Chapter 3
+## Chapter 3 (how the price is made)
+Checked 2026-11-16/17.
+- Contract specs GC (100 oz, 995, $0.10 = $10) and SI (5,000 oz, 999, $0.005 = $25); MGC, SIL; first notice day and last trading day rules: CME Group contract specifications.
+- LBMA Gold/Silver/Platinum/Palladium Price auctions (times, 30-second rounds, run by ICE Benchmark Administration): LBMA and IBA pages.
+- Futures prices and open interest by month, 16 Nov 2026: Barchart futures-prices pages (delayed quotes); saved in `data/curves_2026-11-16.txt`. Computed: roll Dec→Feb $31.40; Dec26→Dec27 +5.4%, Dec27→Dec28 +5.3%; silver Dec26→Dec27 +5.3%; notional values.
+- One-year Treasury bill 4.65% (FRED DGS1, 12 Nov 2026); SOFR 3.90%.
+- GOFO publication stopped January 2015: LBMA.
+- Silver lease rates (normal ≈ 0.35%; 39% one-month in Oct 2025): bullionbypost market commentary.
+- EFP normal ≈ $1.50/oz for gold: SBMA. March 2020 New York over London > $70: Bloomberg via Mining Weekly (March 2020).
+
+## Chapter 4 (the 2025 London silver squeeze)
+- COMEX silver daily closes 1 Aug–1 Dec 2025: Yahoo Finance SI=F, saved in `data/si_daily_2025.txt` (16 Oct close 53.02; 21 Oct 47.45; −10.5% computed).
+- London spot $51.22 on 9 Oct 2025; spread over New York > $2.50; one-month lease 39%; overnight > 100%: Bloomberg via Daily Hodl; bullionbypost; Money Metals.
+- Free float 17% end-Sep 2025 (136 Moz), 28% of 884 Moz end-Mar 2026; ETPs 83% of London silver end-Sep 2025: World Silver Survey 2026 (Metals Focus) via Kitco/FXStreet.
+- About 225 Moz London → CME vaults, Dec 2024–early Oct 2025: Scottsdale Mint; Money Metals.
+- India: largest refiner out of silver; Kotak Mahindra AMC paused silver fund-of-funds inflows from 10 Oct 2025: JPost; Mammoth Times; Kotak notice via press.
+- Air and sea shipments, 15–30 Moz, arrivals around 20 Oct: Bloomberg via Daily Hodl. Above $120 at end-January 2026; ≈ $47 mid-November 2026: Yahoo Finance SI=F.
+
+## Chapter 5 (reading the reports)
+- COT disaggregated futures-only, COMEX gold (088691): CFTC Public Reporting Environment dataset 72hh-3qpy; every fourth week 2016–2026 and the 3 Nov 2026 breakdown saved in `data/cot_gold_mm.txt`. Computed: −33k contracts ≈ 103 t; range −109k (Oct 2018) to +254k (Sep 2017). Release schedule: Fridays 3:30 pm ET, positions as of Tuesday (CFTC).
+- Swap-dealer short as the futures leg of London-long / New-York-short bank positions: Bloomberg (2020).
+- COMEX depository stocks: CME daily reports via MetalCharts (2 Oct 2026: gold 15.1/8.4 Moz, silver 101.1/236.5 Moz registered/eligible; 12 Nov 2026 totals gold 22.93, silver 332.19 Moz).
+- GLD custodians HSBC and JPMorgan, creation by authorised participants: SPDR Gold Trust 10-K.
+- LBMA vault data, end-Oct 2026: 9,850 t gold (787,993 bars), 28,889 t silver; monthly, 5th business day, includes the Bank of England.
+- WGC Gold Demand Trends Q3 2026 (published 3 Nov 2026): total 1,369 t, average $4,262, jewellery consumption 313 t (−17% y/y, weakest Q3 since 2000), inventory 27 t, technology 84.8 t, bar and coin 268 t, ETFs 211 t (holdings 4,256 t), central banks 321 t (+42%), OTC and other 143 t: https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-q3-2026/jewellery ; FXStreet; investinglive.
+- World Silver Survey 2026 (Silver Institute / Metals Focus, 15 Apr 2026): 2025 deficit 40.3 Moz, 2026 forecast 46.3 Moz, mine supply 846.6 Moz, PV 186.6 Moz → ≈151 Moz, 762 Moz drawn from stocks since 2021. WSS 2025 forecast of a 117.6 Moz deficit for 2025: https://mining.com/web/lower-silver-demand-and-higher-supply-to-reduce-global-deficit-by-21-in-2025
+- Johnson Matthey PGM Market Report 2026 (14 May 2026): platinum 2025 deficit 951 koz; palladium 2025 deficit 416 koz, 2026 surplus 214 koz, deficits 2012–2025, recycling recovery: https://www.engineeringnews.co.za/article/platinum-to-remain-in-deficit-this-year-while-palladium-rhodium-to-record-surpluses-johnson-matthey-2026-05-14 ; Metal Radar; Indian Chemical News.
+- Metals Focus 2025 balances (platinum −461 koz, palladium −433 koz): Metals Focus Platinum & Palladium Focus 2026.
+- WPIC 2025 platinum deficit 1.44 Moz (revised): Platinum Quarterly Q2 2026 via Mining Technology.
+
+## Chapter 6 (beta and residuals)
 - Daily closes GC=F, SI=F from Yahoo Finance chart API, 2023-11 to 2026-11-13. Computed: β, ρ, σ for both windows; cumulative residual with β = 1.201. See `data/ch2_beta.md`.
 
-## Chapter 4
+## Chapter 7 (macro)
 - FRED DFII10, T10YIE, DGS10, DGS2, DTWEXBGS (quarterly averages in `data/fred_quarterly.csv`; daily extremes: −1.19% on 2021-08-03, 2.95% on 2026-10-05, 2.86% on 2026-11-12).
 - Gold quarterly averages: Yahoo Finance GC=F. Computed correlations and the −0.14 regression slope.
 - Erb & Harvey, "The Golden Dilemma", FAJ 2013: https://people.duke.edu/~charvey/Research/Published_Papers/P113_The_golden_dilemma.pdf
@@ -63,7 +93,7 @@ Checked November 2026. Plates: Gemini engravings, sheets l–r (anonymous figure
 - BLS schedules (CPI, PPI, Employment Situation, 8:30 ET); BEA schedule (PCE).
 - 2026 events: Reuters via Kitco (29 Jan records; 6 Feb margins), Reuters via Pakistan Today (30 Jan), Bloomberg via BNN (24 Jun), Al Jazeera (16 Sep hike), stockanalysis.com (28 Oct hold), Nation Thailand (30 Oct low), Trading Economics (12–13 Nov CPI and FedWatch odds).
 
-## Chapter 5 (history)
+## Chapter 8 (history)
 - Lydian electrum lion coins under Alyattes (c. 610–560 BC); Croesus's separate gold and silver coins (c. 550 BC): World History Encyclopedia (worldhistory.org/article/797); CoinWeek; rjohara.net; British Museum via Willamette.
 - Laurion silver strike 483 BC, Themistocles' 200 triremes, Salamis 480 BC: Britannica (Themistocles); Livius; HistoryOfWar.
 - Uluburun wreck c. 1300 BC, ~10 t copper (354 ingots, mostly oxhide), ~1 t tin, Cypriot copper: Pulak 2008 (Penn State reading); Biblical Archaeology Society; Wikipedia "Oxhide ingot".
