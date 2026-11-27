@@ -26,4 +26,4 @@ the energy function of the hoop, the harmonic-oscillator change of action).
 
 ## Art
 - Gemini (gemini.google.com), November 2026: cover (watercolour journal), three pastel plate sheets, a washi-tape sheet,
-  chapter openers 1–2; openers 3–4 are crops of the night-sky style sample; openers 5–6 are temporary (mirrored 2 and 1).
+  chapter openers 1, 2, 5, 6; openers 3–4 are crops of the night-sky style sample.
