@@ -18,6 +18,11 @@ the energy function of the hoop, the harmonic-oscillator change of action).
 - Pendulum H = p²/2 − cos q; Liouville square q ∈ [−0.3, 0.3], p ∈ [1.3, 1.9]: area 0.360 at t = 0, 4, 16 (2,000 boundary points, RK4).
 - Hénon–Heiles, E = 1/8: 25 orbits, section x = 0, p_x > 0; 2,207 points; energy error 2e-10.
 
+- Chapter 7, sliding wedge (M = 2 kg, m = 1 kg, α = 30°): Newton's four equations solved with SymPy and compared with
+  the Lagrangian result: s̈ = (M+m)g sin α/(M + m sin²α) = 6.533 m/s², Ẍ = −m g sin α cos α/(M + m sin²α) = −1.886 m/s²,
+  N = M m g cos α/(M + m sin²α) = 7.544 N, N_f = M(M+m)g/(M + m sin²α) = 26.13 N; ground-frame acceleration of the block
+  4.99 m/s² at 40.9° below the horizontal. Fixed slope with μ = 0.3: 2.354 m/s².
+
 ## History (standard facts, from general references)
 - Fermat's principle: letter of 1662. Kepler's second law: Astronomia nova, 1609.
 - E. Noether, "Invariante Variationsprobleme", Göttingen 1918.
@@ -26,4 +31,4 @@ the energy function of the hoop, the harmonic-oscillator change of action).
 
 ## Art
 - Gemini (gemini.google.com), November 2026: cover (watercolour journal), three pastel plate sheets, a washi-tape sheet,
-  chapter openers 1, 2, 5, 6; openers 3–4 are crops of the night-sky style sample.
+  chapter openers 1, 2, 5, 6, 7; openers 3–4 are crops of the night-sky style sample.

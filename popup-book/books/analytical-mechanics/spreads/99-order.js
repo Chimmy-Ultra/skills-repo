@@ -6,6 +6,7 @@ const SPREADS = [
   ch4_a, ch4_b, ch4_c,
   ch5_a, ch5_b, ch5_c,
   ch6_a, ch6_b, ch6_c, ch6_d,
+  ch7_a, ch7_b, ch7_c, ch7_d, ch7_e,
 ];
 
 // spread k (counting from 1) holds pages 2k−1 and 2k; the HUD page box uses the same numbers (book.json pageJump)

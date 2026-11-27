@@ -10,7 +10,7 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOOK = os.path.dirname(HERE)
-FLAT = {'cover', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6'}                       # flat textures keep their background
+FLAT = {'cover', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'}                       # flat textures keep their background
 HOLES = {'sheet-b'}         # also clear big enclosed white areas (lattice, chains)
 
 
