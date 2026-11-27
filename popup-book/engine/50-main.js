@@ -190,13 +190,17 @@ function coverCanvas(img, front) {
       const ty = H * (cv.y || 0.12), ts = H * (cv.size || 0.056);
       g.textAlign = 'center'; g.textBaseline = 'middle';
       g.font = `600 ${ts.toFixed(0)}px ${fontStack()}`;
-      const gr = g.createLinearGradient(0, ty - ts * 0.55, 0, ty + ts * 0.45);
-      gr.addColorStop(0, '#d9b45a'); gr.addColorStop(0.45, '#a87a26'); gr.addColorStop(0.55, '#8c621c'); gr.addColorStop(1, '#c39a43');
-      g.lineJoin = 'round'; g.lineWidth = ts * 0.018; g.strokeStyle = 'rgba(70,46,14,0.55)'; g.strokeText(BOOK.title, W / 2, ty, W * 0.86);
-      g.fillStyle = gr; g.fillText(BOOK.title, W / 2, ty, W * 0.86);
-      const cols = cv.rule || [], ry = ty + ts * 0.78, rw = W * 0.3, seg = rw / Math.max(1, cols.length);
+      // cv.lines: the title split into lines; cv.gilt: four gradient stops; cv.stroke, cv.subColor: optional colours
+      const lines = cv.lines || [BOOK.title], stops = cv.gilt || ['#d9b45a', '#a87a26', '#8c621c', '#c39a43'];
+      lines.forEach((ln, i) => {
+        const yy = ty + i * ts * 1.12, gr = g.createLinearGradient(0, yy - ts * 0.55, 0, yy + ts * 0.45);
+        gr.addColorStop(0, stops[0]); gr.addColorStop(0.45, stops[1]); gr.addColorStop(0.55, stops[2]); gr.addColorStop(1, stops[3]);
+        g.lineJoin = 'round'; g.lineWidth = ts * 0.018; g.strokeStyle = cv.stroke || 'rgba(70,46,14,0.55)'; g.strokeText(ln, W / 2, yy, W * 0.86);
+        g.fillStyle = gr; g.fillText(ln, W / 2, yy, W * 0.86);
+      });
+      const cols = cv.rule || [], ry = ty + (lines.length - 1) * ts * 1.12 + ts * 0.78, rw = W * 0.3, seg = rw / Math.max(1, cols.length);
       cols.forEach((col, i) => { g.fillStyle = col; g.fillRect(W / 2 - rw / 2 + i * seg, ry, seg - H * 0.003, H * 0.0035); });
-      if (cv.subtitle) { g.font = `${cv.italic === false ? '' : 'italic '}${(H * 0.026).toFixed(0)}px ${fontStack()}`; g.fillStyle = '#4a3a2a'; g.fillText(cv.subtitle, W / 2, ry + H * 0.038, W * 0.8); }
+      if (cv.subtitle) { g.font = `${cv.italic === false ? '' : 'italic '}${(H * 0.026).toFixed(0)}px ${fontStack()}`; g.fillStyle = cv.subColor || '#4a3a2a'; g.fillText(cv.subtitle, W / 2, ry + H * (cv.subGap || 0.038), W * 0.8); }
     }
   } else {
     // back board: the cover art without the title

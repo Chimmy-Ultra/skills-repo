@@ -1,0 +1,116 @@
+{
+ "src": [
+  "../art-src"
+ ],
+ "stock": "#f7efe6",
+ "items": [
+  {
+   "flat": "cover",
+   "from": "cover"
+  },
+  {
+   "sheet": [
+    "pend",
+    "bead-wire",
+    "ball-arc",
+    "refraction",
+    "spring",
+    "apple"
+   ],
+   "from": "sheet-a",
+   "cap": 900,
+   "sprite": true,
+   "grow": 25
+  },
+  {
+   "sheet": [
+    "hoop",
+    "dpend-bad",
+    "kepler",
+    "top",
+    "hourglass",
+    "cart"
+   ],
+   "from": "sheet-b",
+   "cap": 900,
+   "sprite": true,
+   "grow": 25
+  },
+  {
+   "sheet": [
+    "dpend-bad2",
+    "galaxy",
+    "gasbox",
+    "orrery",
+    "quill",
+    "compass"
+   ],
+   "from": "sheet-c",
+   "cap": 900,
+   "sprite": true,
+   "grow": 25
+  },
+  {
+   "sheet": [
+    "tape-pink-r",
+    "tape-pink-r2",
+    "tape-lav-r",
+    "tape-lav-r2",
+    "tape-mint-r",
+    "tape-mint-r2",
+    "tape-dots-r",
+    "tape-dots-r2"
+   ],
+   "from": "sheet-t",
+   "cap": 360,
+   "sprite": true,
+   "grow": 15
+  },
+  {
+   "sheet": [
+    "tape-lav-l",
+    "tape-lav-l2",
+    "tape-pink-l",
+    "tape-pink-l2",
+    "tape-dots-l",
+    "tape-dots-l2",
+    "tape-mint-l",
+    "tape-mint-l2"
+   ],
+   "from": "sheet-u",
+   "cap": 360,
+   "sprite": true,
+   "grow": 15
+  },
+  {
+   "flat": "c1",
+   "from": "c1",
+   "quality": 86
+  },
+  {
+   "flat": "c2",
+   "from": "c2",
+   "quality": 86
+  },
+  {
+   "flat": "c3",
+   "from": "c3",
+   "quality": 86
+  },
+  {
+   "flat": "c4",
+   "from": "c4",
+   "quality": 86
+  },
+  {
+   "flat": "c5",
+   "from": "c5",
+   "quality": 86
+  },
+  {
+   "flat": "c6",
+   "from": "c6",
+   "quality": 86
+  }
+ ]
+}

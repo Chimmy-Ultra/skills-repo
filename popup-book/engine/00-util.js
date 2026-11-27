@@ -121,7 +121,8 @@ function drawVText(g, T, k, b) {
 // ---------- horizontal text ----------
 // b: {x, y (top), w (wrap width), size, lh (line height / size), pgap (paragraph gap / size), paras: [string],
 //     color, accent, align ('left' | 'center' | 'right'; x is the left edge, centre or right edge), weight, italic}
-// [[...]] in a paragraph marks words drawn in the accent colour. CJK breaks anywhere, Latin at spaces;
+// [[...]] in a paragraph marks words drawn in the accent colour. $...$ is inline TeX (typeset beforehand by
+// prepareEquations; a spread lists it in its eqs with inline: true). CJK breaks anywhere, Latin at spaces;
 // closing punctuation never starts a line.
 const NO_START = new Set([...'，。、；：！？）」』》〉,.;:!?)]\'"…—']);
 function tokenize(text) {
@@ -130,6 +131,7 @@ function tokenize(text) {
   for (let i = 0; i < text.length; i++) {
     if (text.startsWith('[[', i)) { push(word); word = ''; acc = true; i++; continue; }
     if (text.startsWith(']]', i)) { push(word); word = ''; acc = false; i++; continue; }
+    if (text[i] === '$') { const j = text.indexOf('$', i + 1); if (j > i) { push(word); word = ''; out.push({ t: '', tex: text.slice(i + 1, j), acc }); i = j; continue; } }
     const ch = text[i], cjk = ch.charCodeAt(0) > 0x2e7f;
     if (cjk) { push(word); word = ''; push(ch); }
     else if (ch === ' ') { word += ' '; push(word); word = ''; }
@@ -138,16 +140,19 @@ function tokenize(text) {
   push(word);
   return out;
 }
+// width in pixels of a token: text is measured by the font, inline TeX by its typeset size
+const inlineEq = (tex, b) => EQ.get(eqKey({ eq: tex, color: b.color || INK, inline: true }));
+function tokW(g, tk, b, px) { if (tk.tex == null) return g.measureText(tk.t).width; const e = inlineEq(tk.tex, b); return e ? e.w * px : 0; }
 function layoutHText(g, k, b) {
-  const W = b.w * k, lines = [];
+  const W = b.w * k, lines = [], px = b.size * k;
   for (const para of b.paras) {
     let line = [], lw = 0;
     for (const tk of tokenize(para)) {
-      const w = g.measureText(tk.t).width;
-      if (lw + w > W && line.length && !NO_START.has(tk.t[0])) {
+      const w = tokW(g, tk, b, px);
+      if (lw + w > W && line.length && !(tk.tex == null && NO_START.has(tk.t[0]))) {
         while (line.length && line[line.length - 1].t.endsWith(' ') && line[line.length - 1].t.trim() === '') line.pop();
         lines.push({ toks: line, w: lw }); line = []; lw = 0;
-        if (tk.t.trim() === '') continue;
+        if (tk.tex == null && tk.t.trim() === '') continue;   // a space never starts a line (inline TeX has t = '' but is kept)
       }
       line.push({ ...tk, w }); lw += w;
     }
@@ -160,7 +165,7 @@ function drawHText(g, T, k, b) {
   g.save();
   g.font = `${b.italic ? 'italic ' : ''}${b.weight || 400} ${px.toFixed(1)}px ${fontStack()}`;
   g.textBaseline = 'middle'; g.textAlign = 'left';
-  const lines = layoutHText(g, k, b);
+  const lines = layoutHText(g, k, b), baseOff = g.measureText('H').actualBoundingBoxDescent || px * 0.3;
   let y = b.y, maxw = 0;
   const parts = [];
   for (const L of lines) {
@@ -170,6 +175,7 @@ function drawHText(g, T, k, b) {
     if (lw) parts.push({ x0: X / k - PW, x1: (X + lw) / k - PW, y0: y - lh / 2 - b.size * 0.5, y1: y - lh / 2 + b.size * 0.5 });
     for (const t of L.toks) {
       if (b.halo) { g.lineJoin = 'round'; g.strokeStyle = b.halo; g.lineWidth = px * 0.3; g.strokeText(t.t, X, Y); }
+      if (t.tex != null) { const e = inlineEq(t.tex, b); if (e) g.drawImage(e.img, X, Y + baseOff - (e.h - e.d) * px, e.w * px, e.h * px); X += t.w; continue; }
       g.fillStyle = t.acc ? (b.accent || VERMIL) : (b.color || INK); g.fillText(t.t, X, Y); X += t.w;
     }
     y -= lh + (L.end ? pg : 0);
@@ -181,7 +187,7 @@ function drawHText(g, T, k, b) {
 
 // ---------- equations (TeX, typeset by MathJax into SVG before the pages are printed) ----------
 const EQ = new Map();   // key -> {img, w, h} (w, h in em)
-const eqKey = (b) => `${b.eq}|${b.color || INK}`;
+const eqKey = (b) => `${b.eq}|${b.color || INK}${b.inline ? '|i' : ''}`;
 async function prepareEquations(blocks) {
   if (!blocks.length) return;
   if (!window.MathJax || !window.MathJax.tex2svg) {
@@ -191,13 +197,14 @@ async function prepareEquations(blocks) {
   }
   await Promise.all(blocks.map(async (b) => {
     const key = eqKey(b); if (EQ.has(key)) return;
-    const svg = window.MathJax.tex2svg(b.eq, { display: true }).querySelector('svg');
+    const svg = window.MathJax.tex2svg(b.eq, { display: !b.inline }).querySelector('svg');
     const wEm = parseFloat(svg.getAttribute('width')) * 0.5, hEm = parseFloat(svg.getAttribute('height')) * 0.5;
+    const dEm = -parseFloat((svg.getAttribute('style') || '').match(/vertical-align:\s*(-?[\d.]+)ex/)?.[1] || 0) * 0.5;   // depth below the baseline
     const PX = 160;   // rasterise at 160 px per em: sharp at the largest page scale
     svg.setAttribute('width', (wEm * PX).toFixed(1)); svg.setAttribute('height', (hEm * PX).toFixed(1));
     const src = new XMLSerializer().serializeToString(svg).replaceAll('currentColor', b.color || INK);
     const img = await new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(src); });
-    EQ.set(key, { img, w: wEm, h: hEm });
+    EQ.set(key, { img, w: wEm, h: hEm, d: dEm });
   }));
 }
 // b: {eq, x, y (top), size (em, page units), align, color}

@@ -1,0 +1,55 @@
+{
+  "title": "The Beauty of Analytical Mechanics",
+  "binding": "left",
+  "lang": "en",
+  "latinFont": "EB Garamond",
+  "aria": "The Beauty of Analytical Mechanics: from Newton to phase space. A book you turn with your finger.",
+  "loader": "Loading",
+  "paper": "#f7efe6",
+  "ink": "#3a2c36",
+  "accent": "#b0566f",
+  "frame": "rgba(150,112,140,0.6)",
+  "cover": {
+    "image": "cover",
+    "style": "open",
+    "y": 0.1,
+    "size": 0.052,
+    "lines": [
+      "The Beauty of",
+      "Analytical Mechanics"
+    ],
+    "gilt": [
+      "#e7b9a6",
+      "#b9737e",
+      "#a35f6e",
+      "#d49b95"
+    ],
+    "stroke": "rgba(110,60,80,0.35)",
+    "rule": [
+      "#e3a8b8",
+      "#c3b0e0",
+      "#a9d8c6"
+    ],
+    "subtitle": "From Newton to Phase Space",
+    "subColor": "#6b4f63",
+    "subGap": 0.05
+  },
+  "ui": {
+    "cover": "Cover",
+    "back": "Back cover",
+    "open": "Drag the cover to the left to open the book",
+    "reopen": "Drag the back cover to the right to go back in",
+    "next": "Drag the right page to the left to turn it",
+    "close": "Drag the right page to the left to close the book",
+    "full": "Full screen",
+    "unfull": "Exit full screen",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off",
+    "noFull": "This view does not allow full screen. Open the link in Chrome and try again.",
+    "failed": "Failed to load: ",
+    "page": "Page",
+    "pageGo": "Type a page number and press Enter"
+  },
+  "pageJump": true,
+  "turnHint": "Turn your phone sideways for a bigger book"
+}

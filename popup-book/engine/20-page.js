@@ -135,7 +135,7 @@ class PageArt {
     this.rects = ctx.rects;
     // frame (版框) on each page
     const fm = 0.03;
-    g.strokeStyle = 'rgba(42,33,25,0.78)';
+    g.strokeStyle = BOOK.frame || 'rgba(42,33,25,0.78)';   // book.json "frame": the colour of the page frame
     for (const side of [-1, 1]) {
       const xa = side < 0 ? -PW + fm : fm * 0.55, xb = side < 0 ? -fm * 0.55 : PW - fm;
       const [X0, Y0] = ctx.T(xa, 0.5 - fm), [X1, Y1] = ctx.T(xb, -0.5 + fm);
